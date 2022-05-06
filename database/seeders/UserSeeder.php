@@ -33,30 +33,44 @@ class UserSeeder extends Seeder
         ]);
         
         User::create([
-            'name' => 'Teo Montalvo',
+            'name' => 'Product Owner',
             'email' => 'user1@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'tipo' => 'Administrador'
         ])->assignRole('Admin');
 
         User::create([
             'name' => 'Takeshi Kanashiro',
             'email' => 'user2@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'tipo' => 'Empleado',
+            'direccion' => 'Pampa de la Isla',
+            'telefono' => '785958930',
+            'ci' => '202020',
+            'sueldo' => 2400,
+            'cargo' => 'Encargado de Ventas'
         ])->assignRole('Admin');
 
         User::create([
             'name' => 'Oscar Oros',
             'email' => 'user3@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'direccion' => 'Plan 3k',
+            'telefono' => '785222930',
+            'ci' => '2028590',
+            'tipo' => 'Cliente'
         ])->assignRole('Admin');
 
         User::create([
             'name' => 'Erick Lopez',
             'email' => 'user4@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'direccion' => 'El Urubo',
+            'telefono' => '700008930',
+            'ci' => '748520',
+            'tipo' => 'Cliente'
         ])->assignRole('Admin');
 
-        User::factory(99)->create();
         
         Categoria::create([
             'nombre' => 'Frutas'

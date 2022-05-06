@@ -3,9 +3,7 @@
 @section('title', 'Dueño')
 
 @section('content_header')
-<a class="btn btn-success btn-sm float-right" href="{{route('admin.users.create')}}">
-    <i class="material-icons fa fa-plus"> Nuevo Usuario </i>
-</a>
+
 <h1>Lista de Usuarios</h1>
 <div class="row">
     <div class="form-group col-md-1">
@@ -37,9 +35,11 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>CI</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Tipo</th>
+
                     </tr>
                 </thead> 
 
@@ -49,28 +49,10 @@
                             <td>{{$user->id}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-
-                            <td width="10px">
-                                    <a class="btn btn-outline-secondary" href="{{route('admin.users.show', $user)}}">
-                                        <i class="material-icons fa fa-eye"></i>
-                                    </a>
-                            </td>
-
-                            <td width="10px">
-                                <a class="btn btn-outline-primary" href="{{route('admin.users.edit', $user)}}">
-                                    <i class="material-icons fa fa-pen"></i>
-                                </a>
-                            </td>
-
-                            <td width="10px">
-                                <form action="{{ route('admin.users.destroy', $user->id )}}" method="POST" onsubmit="return confirm('¿Estas seguro de eliminar este a {{$user->name}}?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-outline-danger" type="" rel="tooltip">
-                                        <i class="material-icons fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
+                            <td>{{ $user->ci }}</td>
+                            <td>{{ $user->direccion }}</td>
+                            <td>{{ $user->telefono }}</td>
+                            <td>{{ $user->tipo }}</td>
 
                         </tr>
                     @endforeach  

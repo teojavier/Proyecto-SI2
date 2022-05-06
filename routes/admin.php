@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\PerfilController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\ProductoController;
 use App\Http\Controllers\admin\CategoriaController;
+use App\Http\Controllers\admin\ClienteController;
 use App\Http\Controllers\admin\MarcaController;
 use App\Http\Controllers\admin\ProveedorController;
 use App\Http\Controllers\admin\detalle_productoController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\admin\FacturaController;
 use App\Http\Controllers\admin\Tipo_envioController;
 use App\Http\Controllers\admin\Tipo_PagoController;
 use App\Http\Controllers\admin\ConfiguracionController;
+use App\Http\Controllers\admin\EmpleadoController;
 use App\Http\Controllers\admin\PromocionController;
 
 Route::get('',[HomeController::class, 'index'])->name('admin.home');
@@ -36,6 +38,8 @@ Route::resource('promociones', PromocionController::class)->names('admin.promoci
 //falta
 Route::resource('pedidos', PedidoController::class)->names('admin.pedidos');
 Route::resource('facturas', FacturaController::class)->names('admin.facturas');
+Route::resource('clientes', ClienteController::class)->names('admin.clientes');
+Route::resource('empleados', EmpleadoController::class)->names('admin.empleados');
 
 
 

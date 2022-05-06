@@ -266,12 +266,26 @@ return [
 
         [
             'text'    => 'Gestionar Usuarios',
-            'icon'    => 'fas fa-fw fa-users',
+            'icon'    => 'fas fa-fw fa-user-ninja',
             'submenu' => [
                 [
-                    'text' => 'Clientes',
+                    'text' => 'Usuarios',
                     'route'  => 'admin.users.index',
-                    'icon' => 'fas fa-fw fa-user',
+                    'icon' => 'fas fa-fw fa-users',
+                    'can' => 'admin.users.index'
+                ],
+
+                [
+                    'text' => 'Clientes',
+                    'route'  => 'admin.clientes.index',
+                    'icon' => 'fas fa-fw fa-user-tie',
+                    'can' => 'admin.users.index'
+                ],
+
+                [
+                    'text' => 'Empleados',
+                    'route'  => 'admin.empleados.index',
+                    'icon' => 'fas fa-fw fa-user-tag',
                     'can' => 'admin.users.index'
                 ],
 
