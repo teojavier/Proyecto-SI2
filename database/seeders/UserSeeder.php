@@ -10,6 +10,8 @@ use App\Models\Categoria;
 use App\Models\Configuration;
 use App\Models\Marca;
 use App\Models\Proveedor;
+use App\Models\Tipo_envio;
+use App\Models\Tipo_pago;
 
 class UserSeeder extends Seeder
 {
@@ -96,6 +98,5 @@ class UserSeeder extends Seeder
             'direccion' => 'Los Lotes',
             'telefono' => '745689258'
         ]);
-
     }
 }
