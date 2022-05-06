@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
             'name' => 'Takeshi Kanashiro',
             'email' => 'user2@gmail.com',
             'password' => bcrypt('12345678')
-        ])->assignRole('admin');
+        ])->assignRole('Admin');
 
         User::create([
             'name' => 'Oscar Oros',
@@ -98,5 +98,93 @@ class UserSeeder extends Seeder
             'direccion' => 'Los Lotes',
             'telefono' => '745689258'
         ]);
+        
+        Proveedor::create([
+            'nombre' => 'Luis Lopez',
+            'direccion' => 'La cuchilla',
+            'telefono' => '78024256'
+        ]);
+
+        Proveedor::create([
+            'nombre' => 'Xoca Suarez',
+            'direccion' => 'Las Palmas',
+            'telefono' => '73024578'
+        ]);
+         
+        Proveedor::create([
+            'nombre' => 'Juana Barrios',
+            'direccion' => 'El Quior',
+            'telefono' => '78036987'
+        ]);
+        
+        Proveedor::create([
+            'nombre' => 'Lucas Gutierrez',
+            'direccion' => 'Pampa de la Isla',
+            'telefono' => '780245398'
+        ]);
+        
+        Proveedor::create([
+            'nombre' => 'Luiza Mendoza',
+            'direccion' => 'Plan 3000',
+            'telefono' => '78235896'
+        ]);
+        
+        Proveedor::create([
+            'nombre' => 'Julio Plata',
+            'direccion' => 'Guapurú 1',
+            'telefono' => '78023612'
+        ]);
+         
+        Proveedor::create([
+            'nombre' => 'Eduardo Castillo',
+            'direccion' => 'Plan 4000',
+            'telefono' => '780146325'
+        ]);
+ 
+        Proveedor::create([
+            'nombre' => 'David Zeballos',
+            'direccion' => '2do anillo',
+            'telefono' => '78024269'
+        ]);
+
+        Proveedor::create([
+            'nombre' => 'Felipe Gonzales',
+            'direccion' => '6to anillo',
+            'telefono' => '78025214'
+        ]);
+
+        Proveedor::create([
+            'nombre' => 'Victoria Cruz',
+            'direccion' => '4to anillo la feria',
+            'telefono' => '78024532'
+        ]);
+
+        Proveedor::create([
+            'nombre' => 'Antonio Sosa',
+            'direccion' => '3er anillo externo',
+            'telefono' => '78326111'
+        ]);
+
+        Proveedor::create([
+            'nombre' => 'Jose Mamani',
+            'direccion' => '3er anillo interno',
+            'telefono' => '78302651'
+        ]);
+
+        Proveedor::create([
+            'nombre' => 'Jhon Niuman',
+            'direccion' => 'av.pirai',
+            'telefono' => '78362489'
+        ]);
+
+        Proveedor::create([
+            'nombre' => 'Oscar Oros',
+            'direccion' => 'Pampa de la isla 6to anillo',
+            'telefono' => '78065499'
+        ]);
+
+        
+
+
     }
 }
