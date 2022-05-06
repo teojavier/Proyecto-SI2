@@ -27,9 +27,6 @@ Route::resource('categorias', CategoriaController::class)->names('admin.categori
 Route::resource('marcas', MarcaController::class)->names('admin.marcas');
 Route::resource('proveedores', ProveedorController::class)->names('admin.proveedores');
 Route::resource('detalle_productos', detalle_productoController::class)->names('admin.detalle_productos');
-<<<<<<< HEAD
-Route::resource('Bitacora',BitacoraController::class)->names('Bitacora');
-=======
 Route::resource('configuracion', ConfiguracionController::class)->names('admin.configuracion');
 Route::resource('tipo_envios', Tipo_envioController::class)->names('admin.tipo_envios');
 Route::resource('tipo_pagos', Tipo_PagoController::class)->names('admin.tipo_pagos');
@@ -39,7 +36,6 @@ Route::resource('pedidos', PedidoController::class)->names('admin.pedidos');
 Route::resource('facturas', FacturaController::class)->names('admin.facturas');
 Route::resource('promociones', PromocionController::class)->names('admin.promociones');
 
->>>>>>> 68cf92a050a1fceb10b5ef51c042f14664bc5317
 
 //Generar PDF
 Route::get('/pdf/usuarios', 'App\Http\Controllers\admin\PDFController@PDFUsuarios')->name('admin.PDF.usuarios');
