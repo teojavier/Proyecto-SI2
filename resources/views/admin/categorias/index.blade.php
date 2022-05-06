@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dueño')
+@section('title', 'Categorias')
 
 @section('content_header')
 <a class="btn btn-success btn-sm float-right" href="{{route('admin.categorias.create')}}">

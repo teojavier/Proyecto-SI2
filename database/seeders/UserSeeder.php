@@ -7,8 +7,9 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Producto;
 use App\Models\Categoria;
+use App\Models\Configuration;
 use App\Models\Marca;
-
+use App\Models\Proveedor;
 
 class UserSeeder extends Seeder
 {
@@ -18,6 +19,15 @@ class UserSeeder extends Seeder
      * @return void
      */
     public function run(){
+
+        Configuration::create([
+                'razon_social' => 'TiendaSI2',
+                'factura' => '123456789',
+                'email' => 'tiendaSI2@gmail.com',
+                'telefono' => '+951 700000000',
+                'direccion' => 'Urbanizacion Secret',
+                'responsable' => 'Product Owner'
+        ]);
         
         User::create([
             'name' => 'Teo Montalvo',
@@ -79,6 +89,12 @@ class UserSeeder extends Seeder
 
         Marca::create([
             'nombre' => 'Xiaomi'
+        ]);
+
+        Proveedor::create([
+            'nombre' => 'Juan Perez',
+            'direccion' => 'Los Lotes',
+            'telefono' => '745689258'
         ]);
 
     }

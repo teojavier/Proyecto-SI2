@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proveedor;
 use App\Models\Producto;
+use App\Models\Categoria;
+use App\Models\detalle_productos;
 
 class ProveedorController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -56,8 +59,11 @@ class ProveedorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){
+        
+        $detalles = detalle_productos::where('proveedor_id',$id)->get();
         $proveedor = Proveedor::find($id);
-        return view('admin.proveedores.show',compact('proveedor'));
+        $producto = Producto::all();
+        return view('admin.proveedores.show',compact('detalles', 'proveedor', 'producto'));
     }
 
     /**
