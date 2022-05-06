@@ -9,6 +9,7 @@ use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Configuration;
 use App\Models\Marca;
+use App\Models\Promocion;
 use App\Models\Proveedor;
 use App\Models\Tipo_envio;
 use App\Models\Tipo_pago;
@@ -183,8 +184,50 @@ class UserSeeder extends Seeder
             'telefono' => '78065499'
         ]);
 
-        
+        Tipo_envio::create([
+            'nombre' => 'Pedidos YA',
+            'descripcion' => 'Delivery de color rojo'
+        ]);
 
+        Tipo_envio::create([
+            'nombre' => 'Radio Movil Vallegrande',
+            'descripcion' => 'radio movil ubicado en el Barrio Villa Warnes'
+        ]);
+
+        Tipo_envio::create([
+            'nombre' => 'Yaigo',
+            'descripcion' => 'Delivery de color lila'
+        ]);
+
+        Tipo_pago::create([
+            'nombre' => 'Transaccion QR',
+            'descripcion' => 'Deposito bancario mediante QR'
+        ]);
+
+        Tipo_pago::create([
+            'nombre' => 'Al contado',
+            'descripcion' => 'Pago en mano, ese preciso momento'
+        ]);
+
+        Promocion::create([
+            'nombre' => 'Dia del Padre',
+            'porcentaje' => 10
+        ]);
+
+        Promocion::create([
+            'nombre' => 'Dia de la Madre',
+            'porcentaje' => 10
+        ]);
+
+        Promocion::create([
+            'nombre' => 'Dia del niño',
+            'porcentaje' => 5
+        ]);
+
+        Promocion::create([
+            'nombre' => 'Cumpleaños',
+            'porcentaje' => 8
+        ]);
 
     }
 }

@@ -14,7 +14,8 @@ class Tipo_PagoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin.tipo_pago.index');
+        $tipos = Tipo_pago::all();
+        return view('admin.tipo_pago.index', compact('tipos'));
     }
 
     /**

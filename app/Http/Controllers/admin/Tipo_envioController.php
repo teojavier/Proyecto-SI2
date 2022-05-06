@@ -15,7 +15,8 @@ class Tipo_envioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin.tipo_envio.index');
+        $tipos = Tipo_envio::all();
+        return view('admin.tipo_envio.index', compact('tipos'));
     }
 
     /**

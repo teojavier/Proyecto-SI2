@@ -31,11 +31,12 @@ Route::resource('configuracion', ConfiguracionController::class)->names('admin.c
 Route::resource('tipo_envios', Tipo_envioController::class)->names('admin.tipo_envios');
 Route::resource('tipo_pagos', Tipo_PagoController::class)->names('admin.tipo_pagos');
 Route::resource('Bitacora',BitacoraController::class)->names('Bitacora');
+Route::resource('promociones', PromocionController::class)->names('admin.promociones');
 
 //falta
 Route::resource('pedidos', PedidoController::class)->names('admin.pedidos');
 Route::resource('facturas', FacturaController::class)->names('admin.facturas');
-Route::resource('promociones', PromocionController::class)->names('admin.promociones');
+
 
 
 //Generar PDF

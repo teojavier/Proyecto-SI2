@@ -242,48 +242,72 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
-
+        
         [
-            'text' => 'Configuraciones',
-            'route'  => 'admin.configuracion.index',
-            'icon' => 'fas fa-fw fa-cog',
-            'can' => 'admin.users.index'
+            'text'    => 'Gestionar Informacion',
+            'icon'    => 'fas fa-fw fa-sitemap',
+            'submenu' => [
+                [
+                    'text' => 'Configuraciones',
+                    'route'  => 'admin.configuracion.index',
+                    'icon' => 'fas fa-fw fa-cog',
+                    'can' => 'admin.users.index'
+                ],
+        
+                [
+                    'text' => 'Bitácora',
+                    'route'  => 'Bitacora.index',
+                    'icon' => 'fas fa-fw fa-street-view',
+                    
+                ],
+
+            ],
         ],
 
         [
-            'text' => 'Bitácora',
-            'route'  => 'Bitacora.index',
-            'icon' => 'fas fa-fw fa-user',
-            
+            'text'    => 'Gestionar Usuarios',
+            'icon'    => 'fas fa-fw fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Clientes',
+                    'route'  => 'admin.users.index',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' => 'admin.users.index'
+                ],
+
+            ],
         ],
 
-        [
-            'text' => 'Usuarios',
-            'route'  => 'admin.users.index',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'admin.users.index'
-        ],
+
+
 
         [
-            'text' => ' Productos',
-            'route'  => 'admin.productos.index',
-            'icon' => 'fas fa-fw fa-store',
-            'can' => 'admin.productos.index'
+            'text'    => 'Gestionar Productos',
+            'icon'    => 'fas fa-fw fa-book',
+            'submenu' => [
+                [
+                    'text' => ' Productos',
+                    'route'  => 'admin.productos.index',
+                    'icon' => 'fas fa-fw fa-store',
+                    'can' => 'admin.productos.index'
+                ],
+        
+                [
+                    'text' => ' Categorias',
+                    'route'  => 'admin.categorias.index',
+                    'icon' => 'fas fa-fw fa-gifts',
+                    'can' => 'admin.categorias.index'
+                ],
+        
+                [
+                    'text' => ' Marcas',
+                    'route'  => 'admin.marcas.index',
+                    'icon' => 'fas fa-fw fa-bookmark',
+                    'can' => 'admin.categorias.index'
+                ],
+            ],
         ],
-
-        [
-            'text' => ' Categorias',
-            'route'  => 'admin.categorias.index',
-            'icon' => 'fas fa-fw fa-gifts',
-            'can' => 'admin.categorias.index'
-        ],
-
-        [
-            'text' => ' Marcas',
-            'route'  => 'admin.marcas.index',
-            'icon' => 'fas fa-fw fa-bookmark',
-            'can' => 'admin.categorias.index'
-        ],
+        
         [
             'text'    => 'Detalle de Compra',
             'icon'    => 'fas fa-fw fa-truck',
@@ -305,7 +329,7 @@ return [
         ],
 
         [
-            'text'    => 'Ventas',
+            'text'    => 'Detalle de Ventas',
             'icon'    => 'fas fa-fw fa-balance-scale',
             'submenu' => [
                 [

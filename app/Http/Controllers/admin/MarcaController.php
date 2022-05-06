@@ -15,7 +15,8 @@ class MarcaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin.marcas.index');
+        $marcas = Marca::all();
+        return view('admin.marcas.index', compact('marcas'));
     }
 
     /**

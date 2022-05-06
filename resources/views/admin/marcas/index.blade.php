@@ -18,18 +18,65 @@
             </div>
     @endif
 
-@livewire('admin.marca-index')
-
+    <div class="card-body">
+        <table class="table table-striped" id="marcas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead> 
+    
+            <tbody>
+                @foreach($marcas as $marca)
+                    <tr>
+                        <td>{{ $marca->id }}</td>
+                        <td>{{ $marca->nombre }}</td>
+    
+    
+                        <td width="10px">
+                                <a class="btn btn-outline-primary" href="{{route('admin.marcas.edit', $marca)}}">
+                                    <i class="material-icons fa fa-pen"></i>
+                                </a>
+                        </td>    
+    
+                        <td width="10px">
+                                <form action="{{route('admin.marcas.destroy', $marca)}}" method="POST" onsubmit="return confirm('¿Estas seguro de eliminar la Marca:  {{$marca->nombre}} ?')">
+                                 @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-outline-danger" type="" rel="tooltip">
+                                        <i class="material-icons fa fa-trash"></i>
+                                    </button>
+                                </form>
+                        </td>
+    
+    
+    
+                    </tr>
+                @endforeach  
+            </tbody>
+        </table>
+    </div>
 
 
 @stop
 
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">
-@livewireStyles
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css">
 @stop
 
 @section('js')
-<script>console.log('hi!')</script>
-@livewireScripts
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+     $('#marcas').DataTable();
+    } );
+</script>
 @stop
+
+

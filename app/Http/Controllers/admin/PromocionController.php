@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Promocion;
 use Illuminate\Http\Request;
 
 class PromocionController extends Controller
@@ -12,9 +13,9 @@ class PromocionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(){
+        $promociones = Promocion::all();
+        return view('admin.promociones.index', compact('promociones'));
     }
 
     /**
@@ -22,9 +23,8 @@ class PromocionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('admin.promociones.create');
     }
 
     /**
@@ -35,7 +35,16 @@ class PromocionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'porcentaje' => 'required|numeric|between:0,99.99'
+        ]);
+        Promocion::Create([
+            'nombre' => $request->nombre,
+            'porcentaje' => $request->porcentaje,
+        ]);
+        return redirect()->route('admin.promociones.index')->with('info', 'La Promocion se ha registrado correctamente');
+
     }
 
     /**
@@ -57,7 +66,8 @@ class PromocionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $promocion = Promocion::find($id);
+        return view('admin.promociones.edit', compact('promocion'));
     }
 
     /**
@@ -67,9 +77,17 @@ class PromocionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
+        $request->validate([
+            'nombre' => 'required',
+            'porcentaje' => 'required|numeric|between:0,99.99'
+        ]);
+        $promocion = Promocion::find($id);
+        $promocion->nombre = $request->nombre;
+        $promocion->porcentaje = $request->porcentaje;
+        $promocion->save();
+        return redirect()->route('admin.promociones.edit', $promocion)->with('info', 'los datos se editaron correctamente');
+
     }
 
     /**
@@ -80,6 +98,8 @@ class PromocionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $promocion = Promocion::find($id);
+        $promocion->delete();
+        return back()->with('info','La Promocion ha sido eliminado correctamente');
     }
 }

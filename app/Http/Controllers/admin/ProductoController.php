@@ -17,7 +17,10 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin.productos.index');
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+        $productos = Producto::all();
+        return view('admin.productos.index', compact('productos', 'categorias', 'marcas'));
     }
 
     /**
@@ -41,8 +44,8 @@ class ProductoController extends Controller
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
-            'precio' => 'required',
-            'stock' => 'required',
+            'precio' => 'required|numeric',
+            'stock' => 'required|integer',
             'categoria_id' => 'required',
             'marca_id' => 'required',
             'imagen' => 'required|image|max::2048'
@@ -99,8 +102,8 @@ class ProductoController extends Controller
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
-            'precio' => 'required',
-            'stock' => 'required'
+            'precio' => 'required|numeric',
+            'stock' => 'required|integer',
         ]);
 
         $data = $request->only('id','nombre', 'descripcion', 'precio', 'stock');

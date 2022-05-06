@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('promocions', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->float('porcentaje',9,2)->nullable();
             $table->timestamps();
         });
     }

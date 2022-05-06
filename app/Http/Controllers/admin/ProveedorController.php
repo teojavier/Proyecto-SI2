@@ -18,7 +18,8 @@ class ProveedorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin.proveedores.index');
+        $proveedores = Proveedor::all();
+        return view('admin.proveedores.index', compact('proveedores'));
     }
 
     /**

@@ -16,7 +16,10 @@ class Detalle_productoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin.detalleProducto.index');
+        $detalles = detalle_productos::all();
+        $proveedor = Proveedor::all();
+        $producto = Producto::all();
+        return view('admin.detalleProducto.index', compact('detalles', 'proveedor', 'producto'));
     }
 
     /**
@@ -40,11 +43,9 @@ class Detalle_productoController extends Controller
         $request->validate([
             'producto_id' => 'required',
             'proveedor_id' => 'required',
-            'precio' => 'required',
+            'precio' => 'required|numeric',
             'cantidad' => 'required|integer',
         ]);
-
-
 
         $detalle = new detalle_productos();
         $detalle->producto_id = $request->producto_id;
@@ -106,7 +107,7 @@ class Detalle_productoController extends Controller
         $request->validate([
             'producto_id' => 'required',
             'proveedor_id' => 'required',
-            'precio' => 'required',
+            'precio' => 'required|numeric',
             'cantidad' => 'required|integer',
         ]);
         $detalle = detalle_productos::where('id', $id)->first();
