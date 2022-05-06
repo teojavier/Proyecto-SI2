@@ -30,6 +30,7 @@ Route::resource('detalle_productos', detalle_productoController::class)->names('
 Route::resource('configuracion', ConfiguracionController::class)->names('admin.configuracion');
 Route::resource('tipo_envios', Tipo_envioController::class)->names('admin.tipo_envios');
 Route::resource('tipo_pagos', Tipo_PagoController::class)->names('admin.tipo_pagos');
+Route::resource('Bitacora',BitacoraController::class)->names('Bitacora');
 
 //falta
 Route::resource('pedidos', PedidoController::class)->names('admin.pedidos');
