@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoredUserRequest;
-
+use Spatie\Activitylog\Models\Activity;
 
 class UserController extends Controller
 {
@@ -43,6 +43,14 @@ class UserController extends Controller
         $user['password'] = bcrypt($request->password);
         $user->save();
         $user->roles()->sync($request->roles);
+
+        activity()->useLog('Usuarios')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $user->id;
+        $lastActivity->save();
+
+
+
         return redirect()->route('admin.users.index')->with('info', 'Se creo el usuario correctamente');
     }
 
@@ -67,6 +75,11 @@ class UserController extends Controller
     public function edit(User $user){
 
         $roles = Role::all();
+
+        
+
+
+
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
@@ -90,6 +103,13 @@ class UserController extends Controller
         $user->update($data);
 
         $user->roles()->sync($request->roles);
+
+
+        activity()->useLog('Usuarios')->log('Editó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $user->id;
+        $lastActivity->save();
+
         return redirect()->route('admin.users.edit', $user)->with('info', 'Se editaron los datos correctamente');
         
     }
@@ -102,6 +122,15 @@ class UserController extends Controller
      */
     public function destroy(User $user){
         $user->delete();
+
+        activity()->useLog('Usuarios')->log('Eliminó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $user->id;
+        $lastActivity->save();
+
+
+
+
         return back()->with('info','El Usuario ha sido eliminado correctamente');
     }
 

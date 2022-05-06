@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\admin\BitacoraController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\PerfilController;
@@ -19,6 +21,7 @@ Route::resource('categorias', CategoriaController::class)->names('admin.categori
 Route::resource('marcas', MarcaController::class)->names('admin.marcas');
 Route::resource('proveedores', ProveedorController::class)->names('admin.proveedores');
 Route::resource('detalle_productos', detalle_productoController::class)->names('admin.detalle_productos');
+Route::resource('Bitacora',BitacoraController::class)->names('Bitacora');
 
 //Generar PDF
 Route::get('/pdf/usuarios', 'App\Http\Controllers\admin\PDFController@PDFUsuarios')->name('admin.PDF.usuarios');

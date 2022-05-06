@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'name' => 'Takeshi Kanashiro',
             'email' => 'user2@gmail.com',
             'password' => bcrypt('12345678')
-        ])->assignRole('admin');
+        ])->assignRole('Admin');
 
         User::create([
             'name' => 'Oscar Oros',

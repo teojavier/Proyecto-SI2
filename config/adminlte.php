@@ -248,6 +248,13 @@ return [
         ],
 
         [
+            'text' => 'Bitácora',
+            'route'  => 'Bitacora.index',
+            'icon' => 'fas fa-fw fa-user',
+            
+        ],
+
+        [
             'text' => 'Usuarios',
             'route'  => 'admin.users.index',
             'icon' => 'fas fa-fw fa-user',
