@@ -32,7 +32,7 @@
                             <td>{{ $proveedor->telefono }}</td>
 
                             <td width="10px">
-                                <a class="btn btn-warning" href="{{route('admin.proveedores.show', $proveedor->id)}}">
+                                <a class="btn btn-outline-secondary"  href="{{route('admin.proveedores.show', $proveedor->id)}}">
                                             <i class="material-icons fa fa-eye"></i>
                                 </a>
                             </td>

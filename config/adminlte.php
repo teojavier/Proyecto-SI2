@@ -45,7 +45,8 @@ return [
     |
     */
 
-    'logo' => '<b>Tienda</b>SI2',
+
+    'logo' => '<b>Administrador</b>',
     'logo_img' => 'vendor/adminlte/dist/img/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -66,7 +67,7 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-danger',
+    'usermenu_header_class' => 'bg-warning',
     'usermenu_image' => true,
     'usermenu_desc' => true,
     'usermenu_profile_url' => true,
@@ -127,9 +128,9 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-purple elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-dark',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -150,7 +151,7 @@ return [
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
-    'sidebar_scrollbar_theme' => 'os-theme-light',
+    'sidebar_scrollbar_theme' => 'os-theme-dark',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
     'sidebar_nav_animation_speed' => 300,
@@ -172,7 +173,7 @@ return [
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
     'right_sidebar_push' => true,
-    'right_sidebar_scrollbar_theme' => 'os-theme-light',
+    'right_sidebar_scrollbar_theme' => 'os-theme-dark',
     'right_sidebar_scrollbar_auto_hide' => 'l',
 
     /*
@@ -241,10 +242,12 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
+
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'Configuraciones',
+            'route'  => 'admin.configuracion.index',
+            'icon' => 'fas fa-fw fa-cog',
+            'can' => 'admin.users.index'
         ],
 
         [
@@ -276,7 +279,7 @@ return [
         ],
         [
             'text'    => 'Detalle de Compra',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-fw fa-truck',
             'submenu' => [
                 [
                     'text' => ' Proveedores',
@@ -294,6 +297,56 @@ return [
             ],
         ],
 
+        [
+            'text'    => 'Ventas',
+            'icon'    => 'fas fa-fw fa-balance-scale',
+            'submenu' => [
+                [
+                    'text' => 'Pedidos',
+                    'route'  => 'admin.pedidos.index',
+                    'icon' => 'fas fa-fw fa-shopping-cart',
+                    'can' => 'admin.categorias.index'
+                ],
+
+                [
+                    'text'    => 'Detalle de Pedido',
+                    'icon' => 'fas fa-fw fa-info-circle',
+                    'route'  => 'admin.detalle_productos.index',
+                    'can' => 'admin.categorias.index'
+                ],
+
+
+                [
+                    'text'    => 'Tipo de Envio',
+                    'icon' => 'fas fa-fw fa-car',
+                    'route'  => 'admin.tipo_envios.index',
+                    'can' => 'admin.categorias.index'
+                ],
+
+                [
+                    'text'    => 'Tipo de Pago',
+                    'icon' => 'fas fa-fw fa-credit-card',
+                    'route'  => 'admin.tipo_pagos.index',
+                    'can' => 'admin.categorias.index'
+                ],
+
+                [
+                    'text'    => 'Factura',
+                    'icon' => 'fas fa-fw fa-fax',
+                    'route'  => 'admin.facturas.index',
+                    'can' => 'admin.categorias.index'
+                ],
+
+                [
+                    'text'    => 'Promociones',
+                    'icon' => 'fas fa-fw fa-percent',
+                    'route'  => 'admin.promociones.index',
+                    'can' => 'admin.categorias.index'
+                ],
+            ],
+            ],
+    
+
 
 
         [
@@ -303,78 +356,7 @@ return [
             'can' => 'admin.categorias.index'
         ],
 
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'route'  => 'admin.perfil.index',
-            'icon' => '',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+    
     ],
 
     /*
