@@ -1,19 +1,19 @@
 @extends('adminlte::page')
 
-@section('title', 'Clientes')
+@section('title', 'Empleados')
 
 @section('content_header')
-    <a class="btn btn-success btn-sm float-right" href="{{ route('admin.clientes.create') }}">
-        <i class="material-icons fa fa-plus"> Nuevo Cliente </i>
+    <a class="btn btn-success btn-sm float-right" href="{{ route('admin.empleados.create') }}">
+        <i class="material-icons fa fa-plus"> Nuevo Empleado </i>
     </a>
-    <h1>Lista de Clientes</h1>
+    <h1>Lista de Empleados</h1>
     <div class="row">
         <div class="form-group col-md-1">
             <p>Reportes en: </p>
         </div>
 
         <div class="form-group col-md-2">
-            <a class="btn btn-primary btn-sm float-left" href="{{route('admin.PDF.clientes')}}">
+            <a class="btn btn-primary btn-sm float-left" href="{{route('admin.PDF.empleados')}}">
                 <i class="fa fa-download"></i>
                 PDF
             </a>
@@ -40,6 +40,8 @@
                     <th>CI</th>
                     <th>Direccion</th>
                     <th>Telefono</th>
+                    <th>Cargo</th>
+                    <th>Sueldo(Bs)</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -49,7 +51,7 @@
             <tbody>
 
                 @foreach ($users as $user)
-                    @if ($user->tipo == 'Cliente')
+                    @if ($user->tipo == 'Empleado')
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
@@ -57,21 +59,23 @@
                             <td>{{ $user->ci }}</td>
                             <td>{{ $user->direccion }}</td>
                             <td>{{ $user->telefono }}</td>
+                            <td>{{ $user->cargo }}</td>
+                            <td>{{ $user->sueldo }}</td>
 
                             <td width="10px">
-                                <a class="btn btn-outline-secondary" href="{{ route('admin.clientes.show', $user) }}">
+                                <a class="btn btn-outline-secondary" href="{{ route('admin.empleados.show', $user) }}">
                                     <i class="material-icons fa fa-eye"></i>
                                 </a>
                             </td>
 
                             <td width="10px">
-                                <a class="btn btn-outline-primary" href="{{ route('admin.clientes.edit', $user->id) }}">
+                                <a class="btn btn-outline-primary" href="{{ route('admin.empleados.edit', $user->id) }}">
                                     <i class="material-icons fa fa-pen"></i>
                                 </a>
                             </td>
 
                             <td width="10px">
-                                <form action="{{ route('admin.clientes.destroy', $user->id) }}" method="POST"
+                                <form action="{{ route('admin.empleados.destroy', $user->id) }}" method="POST"
                                     onsubmit="return confirm('¿Estas seguro de eliminar este a {{ $user->name }}?')">
                                     @csrf
                                     @method('DELETE')

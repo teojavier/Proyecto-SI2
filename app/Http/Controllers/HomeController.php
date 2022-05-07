@@ -24,7 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $configuration = Configuration::find(1);
-        return view('admin.index', compact('configuration'));
+        if (auth()->user()->tipo == 'Administrador') {
+            $configuration = Configuration::find(1);
+            return view('admin.index', compact('configuration'));
+        } else {
+            if (auth()->user()->tipo == 'Cliente') {
+                return view('cliente.index');
+            } else {
+                if (auth()->user()->tipo == 'Empleado') {
+                    $configuration = Configuration::find(1);
+                    return view('admin.index', compact('configuration'));
+                }
+            }
+        }
     }
 }

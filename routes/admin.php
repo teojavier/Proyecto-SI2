@@ -34,17 +34,20 @@ Route::resource('tipo_envios', Tipo_envioController::class)->names('admin.tipo_e
 Route::resource('tipo_pagos', Tipo_PagoController::class)->names('admin.tipo_pagos');
 Route::resource('Bitacora',BitacoraController::class)->names('Bitacora');
 Route::resource('promociones', PromocionController::class)->names('admin.promociones');
+Route::resource('clientes', ClienteController::class)->names('admin.clientes');
+Route::resource('empleados', EmpleadoController::class)->names('admin.empleados');
 
 //falta
 Route::resource('pedidos', PedidoController::class)->names('admin.pedidos');
 Route::resource('facturas', FacturaController::class)->names('admin.facturas');
-Route::resource('clientes', ClienteController::class)->names('admin.clientes');
-Route::resource('empleados', EmpleadoController::class)->names('admin.empleados');
+
 
 
 
 //Generar PDF
 Route::get('/pdf/usuarios', 'App\Http\Controllers\admin\PDFController@PDFUsuarios')->name('admin.PDF.usuarios');
+Route::get('/pdf/clientes', 'App\Http\Controllers\admin\PDFController@PDFClientes')->name('admin.PDF.clientes');
+Route::get('/pdf/empleados', 'App\Http\Controllers\admin\PDFController@PDFEmpleados')->name('admin.PDF.empleados');
 
 
 

@@ -2,6 +2,8 @@
 
 @section('content')
     <!-- Create By Joker Banny -->
+    <?php $configuracion=DB::table('configurations')->where('id',1)->first();
+    ?>
     <div class="min-h-screen bg-no-repeat bg-cover bg-center"
         style="background-image: url('https://a-static.besthdwallpaper.com/apartamento-tienda-papel-pintado-1440x960-23850_37.jpg')">
         <div class="flex justify-end">
@@ -12,7 +14,7 @@
                         action="{{ route('login') }}">
                         @csrf
                         <div>
-                            <span class="text-sm text-gray-900">Bienvenido a Nuestra Tienda en linea</span>
+                            <span class="text-sm text-gray-900">Bienvenido a {{$configuracion->razon_social}} Online</span>
                             <h1 class="text-2xl font-bold">Inicia Session</h1>
                         </div>
 
