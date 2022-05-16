@@ -16,6 +16,7 @@ use App\Http\Controllers\admin\FacturaController;
 use App\Http\Controllers\admin\Tipo_envioController;
 use App\Http\Controllers\admin\Tipo_PagoController;
 use App\Http\Controllers\admin\ConfiguracionController;
+use App\Http\Controllers\admin\detalle_pedidoController;
 use App\Http\Controllers\admin\EmpleadoController;
 use App\Http\Controllers\admin\PromocionController;
 
@@ -39,10 +40,13 @@ Route::resource('empleados', EmpleadoController::class)->names('admin.empleados'
 
 //falta
 Route::resource('pedidos', PedidoController::class)->names('admin.pedidos');
+Route::resource('detalle_pedidos', detalle_pedidoController::class)->names('admin.detalle_pedidos');
 Route::resource('facturas', FacturaController::class)->names('admin.facturas');
 
 
 
+Route::get('detalle_pedidos/Productos/{id}',[detalle_pedidoController::class,'indexP'])->name('admin.detalle_pedidos.indexP');
+Route::post('detalle_pedidos/Store_Productos/{id}',[detalle_pedidoController::class,'storeP'])->name('admin.detalle_pedidos.storeP');
 
 //Generar PDF
 Route::get('/pdf/usuarios', 'App\Http\Controllers\admin\PDFController@PDFUsuarios')->name('admin.PDF.usuarios');

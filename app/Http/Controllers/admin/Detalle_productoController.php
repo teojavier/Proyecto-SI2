@@ -57,15 +57,11 @@ class Detalle_productoController extends Controller
         //Actualizar el stock por la compra de productos
 
         //busca el producto
-        $producto = Producto::find($request->producto_id)->first();
-        //busca todos los detalles de ese producto
-        $detalles = detalle_productos::where('producto_id', $producto->id)->get();
+        $producto = Producto::where('id', $detalle->producto_id)->first();
         //actualiza el stock del producto
-        $stock = 0;
-        foreach ($detalles as $key) {
-            $stock = $stock + $key->cantidad;
-        }
-        $producto->stock = $stock;
+
+
+        $producto->stock = $producto->stock + $detalle->cantidad ;
         $producto->save();
 
         return redirect()->route('admin.detalle_productos.index')->with('info', 'La Compra se ha registrado correctamente');
@@ -114,21 +110,18 @@ class Detalle_productoController extends Controller
         $detalle->producto_id = $request->producto_id;
         $detalle->proveedor_id = $request->proveedor_id;
         $detalle->precio = $request->precio;
-        $detalle->cantidad = $request->cantidad;
-        $detalle->save();
+        
+        
         
         //buscamos el producto de ese detalle
         $producto = Producto::where('id', $detalle->producto_id)->first();
-        //busca todos los detalles de ese producto
-        $detalles = detalle_productos::where('producto_id', $producto->id)->get();
-        //actualiza el stock del producto
-        $stock = 0;
-        foreach ($detalles as $key) {
-            $stock = $stock + $key->cantidad;
-        }
-        $producto->stock = $stock;
-        $producto->save();
+        
+            $producto->stock = $producto->stock - $detalle->cantidad; //quito el viejo
+            $producto->stock = $producto->stock + $request->cantidad ; //Añado el nuevo
 
+        $producto->save();
+        $detalle->cantidad = $request->cantidad;
+        $detalle->save();
         return redirect()->route('admin.detalle_productos.edit', $detalle->id)->with('info', 'Los datos se editaron correctamente');
 
 
@@ -143,19 +136,16 @@ class Detalle_productoController extends Controller
     public function destroy($id){
         //buscamos y eliminamos el detalle
         $detalle = detalle_productos::where('id', $id)->first();
-        $detalle->delete();
 
-        //buscamos el producto de ese detalle
         $producto = Producto::where('id', $detalle->producto_id)->first();
-        //busca todos los detalles de ese producto
-        $detalles = detalle_productos::where('producto_id', $producto->id)->get();
-        //actualiza el stock del producto
-        $stock = 0;
-        foreach ($detalles as $key) {
-            $stock = $stock + $key->cantidad;
+
+        $producto->stock = $producto->stock - $detalle->cantidad ;
+        if($producto->stock < 1){
+            $producto->stock = 0;
         }
-        $producto->stock = $stock;
         $producto->save();
+
+        $detalle->delete();
         return back()->with('info','El detalle ha sido eliminado correctamente');
     }
 }

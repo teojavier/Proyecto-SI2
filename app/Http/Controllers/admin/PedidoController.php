@@ -3,7 +3,15 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
+use App\Models\detalle_pedido;
+use App\Models\Marca;
 use App\Models\Pedido;
+use App\Models\Producto;
+use App\Models\Promocion;
+use App\Models\Tipo_envio;
+use App\Models\Tipo_pago;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -26,7 +34,11 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        $tipopagos = Tipo_pago::all();
+        $tipoenvios = Tipo_envio::all();
+        $promociones = Promocion::all();
+        $clientes = User::all();
+        return view('admin.pedidos.create', compact('tipopagos', 'tipoenvios', 'promociones', 'clientes'));
     }
 
     /**
@@ -37,7 +49,23 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'direccion' => 'required',
+            'tipoEnvio_id' => 'required',
+            'tipoPago_id' => 'required',
+            'promocion_id' => 'required',
+            'cliente_id' => 'required',
+        ]);
+        $pedido = New Pedido();
+        $pedido->direccion = $request->direccion;
+        $pedido->tipoEnvio_id = $request->tipoEnvio_id;
+        $pedido->tipoPago_id = $request->tipoPago_id;
+        $pedido->promocion_id = $request->promocion_id;
+        $pedido->cliente_id = $request->cliente_id;
+        $pedido->estado = 'En espera';
+        $pedido->save();
+        return redirect()->route('admin.pedidos.index')->with('info', 'El Pedido se ha registrado correctamente');
+
     }
 
     /**

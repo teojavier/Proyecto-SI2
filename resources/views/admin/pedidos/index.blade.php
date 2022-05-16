@@ -43,6 +43,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead> 
 
@@ -54,10 +55,30 @@
                             <td>{{$pedido->direccion}}</td>
                             <td>{{ $pedido->fecha_pedido }}</td>
                             <td>{{ $pedido->total }}</td>
-                            <td>{{$pedido->estado}}</td>
+
+                            @if ($pedido->estado == 'En espera')
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="#" role="button">{{$pedido->estado}}</a>
+                            </td>
+                            
+                            @endif
+
+                            @if ($pedido->estado == 'Entregado')
+                            <td>
+                                <a class="btn btn-success btn-sm" href="#" role="button">{{$pedido->estado}}</a>
+                            </td>
+                            
+                            @endif
+
                             <td width="10px">
-                                <a class="btn btn-outline-secondary" href="{{ route('admin.pedidos.show', $pedido) }}">
-                                    <i class="material-icons fa fa-eye"></i>
+                                <a class="btn btn-info" href="{{ route('admin.detalle_pedidos.indexP', $pedido->id) }}">
+                                    Productos
+                                </a>
+                            </td>
+
+                            <td width="10px">
+                                <a class="btn btn-secondary" href="{{ route('admin.detalle_pedidos.show', $pedido->id) }}">
+                                    Detalle
                                 </a>
                             </td>
 
@@ -100,6 +121,9 @@
     $(document).ready(function() {
      $('#pedidos').DataTable();
     } );
+</script>
+<script>
+    console.log('hi!')
 </script>
 @stop
 

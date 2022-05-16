@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->string('direccion');
-            $table->boolean('estado');
-            $table->dateTime('fecha_entrega');
-            $table->dateTime('fecha_pedido');
-            $table->float('total',9,2);
+            $table->string('estado');
+            $table->dateTime('fecha_entrega')->nullable();
+            $table->dateTime('fecha_pedido')->nullable();
+            $table->float('total',9,2)->nullable();
             $table->unsignedBigInteger('cliente_id')->nullable()->foreign('cliente_id')->references('id')->on('users')->onDelete('set null');
             $table->unsignedBigInteger('tipoEnvio_id')->nullable()->foreign('tipoEnvio_id')->references('id')->on('tipo_envios')->onDelete('set null');
             $table->unsignedBigInteger('tipoPago_id')->nullable()->foreign('tipoPago_id')->references('id')->on('tipo_pagos')->onDelete('set null');

@@ -25,6 +25,7 @@
                     <th style=" width: 10px;">ID</th>
                     <th style=" width: 50px;">Nombre</th>
                     <th style=" width: 200px;">Descripcion</th>
+                    <th style=" width: 100px;">categoria</th>
                     <th style=" width: 100px;">Marca</th>
                     <th style=" width: 100px;">Precio</th>
                     <th style=" width: 100px;">Stock</th>
@@ -41,12 +42,21 @@
                         <td>{{ $producto->descripcion }}</td>
 
                         <td>
+                            @foreach($categorias as $categoria)
+                                @if($producto->categoria_id == $categoria->id)
+                                {{$categoria->nombre}}
+                                @endif
+                            @endforeach
+                        </td>
+
+                        <td>
                             @foreach($marcas as $marca)
                                 @if($producto->marca_id == $marca->id)
                                 {{$marca->nombre}}
                                 @endif
                             @endforeach
                         </td>
+
 
                         <td>{{ $producto->precio }} Bs</td>
                         <td>{{ $producto->stock }}</td>

@@ -356,7 +356,7 @@ return [
                 [
                     'text'    => 'Detalle de Pedido',
                     'icon' => 'fas fa-fw fa-info-circle',
-                    'route'  => 'admin.detalle_productos.index',
+                    'route'  => 'admin.detalle_pedidos.index',
                     'can' => 'admin.categorias.index'
                 ],
 
