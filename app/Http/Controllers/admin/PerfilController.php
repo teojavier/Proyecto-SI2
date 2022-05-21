@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Marca;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -15,8 +16,9 @@ class PerfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $producto = Producto::find(1);
-        return view('admin.perfil.imagen', compact('producto')); 
+        $productos = Producto::all();
+        $marcas = Marca::all();
+        return view('admin.perfil.imagen', compact('productos', 'marcas')); 
     }
 
     /**

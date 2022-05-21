@@ -44,9 +44,13 @@ Route::resource('detalle_pedidos', detalle_pedidoController::class)->names('admi
 Route::resource('facturas', FacturaController::class)->names('admin.facturas');
 
 
+Route::get('pedidos/entregado/{id}',[PedidoController::class,'entregado'])->name('admin.pedidos.entregado');
+Route::get('pedidos/espera/{id}',[PedidoController::class,'espera'])->name('admin.pedidos.espera');
+
 
 Route::get('detalle_pedidos/Productos/{id}',[detalle_pedidoController::class,'indexP'])->name('admin.detalle_pedidos.indexP');
 Route::post('detalle_pedidos/Store_Productos/{id}',[detalle_pedidoController::class,'storeP'])->name('admin.detalle_pedidos.storeP');
+Route::get('detalle_pedidos/editGeneral/{id}',[detalle_pedidoController::class,'editGeneral'])->name('admin.detalle_pedidos.editGeneral');
 
 //Generar PDF
 Route::get('/pdf/usuarios', 'App\Http\Controllers\admin\PDFController@PDFUsuarios')->name('admin.PDF.usuarios');

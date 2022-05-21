@@ -59,7 +59,7 @@
                         <td>{{ $producto->stock }}</td>
 
                         <td>
-                            <img src="{{ $producto->imagen }}" width="100%" class="img-thumbnail center-block">
+                            <iframe height="130" width="150" scrolling="no" src="{{$producto->imagen}}" frameBorder="0"></iframe>
                         </td>
 
                         {!! Form::open(['route' => ['admin.detalle_pedidos.storeP', $producto->id], 'autocomplete' => 'off']) !!}

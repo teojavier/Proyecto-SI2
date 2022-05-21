@@ -24,7 +24,8 @@ class PedidoController extends Controller
     public function index()
     {
         $pedidos = Pedido::all();
-        return view('admin.pedidos.index', compact('pedidos'));
+        $clientes = User::all();
+        return view('admin.pedidos.index', compact('pedidos', 'clientes'));
     }
 
     /**
@@ -53,7 +54,6 @@ class PedidoController extends Controller
             'direccion' => 'required',
             'tipoEnvio_id' => 'required',
             'tipoPago_id' => 'required',
-            'promocion_id' => 'required',
             'cliente_id' => 'required',
         ]);
         $pedido = New Pedido();
@@ -62,7 +62,9 @@ class PedidoController extends Controller
         $pedido->tipoPago_id = $request->tipoPago_id;
         $pedido->promocion_id = $request->promocion_id;
         $pedido->cliente_id = $request->cliente_id;
+        $pedido->fecha_pedido = now();
         $pedido->estado = 'En espera';
+        $pedido->estado_pago = 'Impagado';
         $pedido->save();
         return redirect()->route('admin.pedidos.index')->with('info', 'El Pedido se ha registrado correctamente');
 
@@ -87,7 +89,13 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pedido = Pedido::where('id', $id)->first();
+        $tipopagos = Tipo_pago::all();
+        $tipoenvios = Tipo_envio::all();
+        $promociones = Promocion::all();
+        $clientes = User::all();
+        return view('admin.pedidos.edit', compact('tipopagos', 'tipoenvios', 'promociones', 'clientes', 'pedido'));
+   
     }
 
     /**
@@ -99,7 +107,19 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'direccion' => 'required',
+            'tipoEnvio_id' => 'required',
+            'tipoPago_id' => 'required',
+            'cliente_id' => 'required',
+        ]);
+
+        $pedido = Pedido::where('id', $id)->first();
+        $pedido->cliente_id = $request->cliente_id;
+        $pedido->direccion = $request->direccion;
+        $pedido->tipoEnvio_id = $request->tipoEnvio_id;
+        $pedido->tipoPago_id = $request->tipoPago_id;
+        $pedido->save();
     }
 
     /**
@@ -112,4 +132,20 @@ class PedidoController extends Controller
     {
         //
     }
+
+    public function entregado($id){
+        $pedido = Pedido::find($id);
+        $pedido->estado = 'Entregado';
+        $pedido->save();
+        return back()->with('info','Cambio de estado a Entregado');
+    }
+
+    public function espera($id){
+        $pedido = Pedido::find($id);
+        $pedido->estado = 'En espera';
+        $pedido->save();
+        return back()->with('info','Cambio de estado a En Espera');
+    }
+
+    
 }

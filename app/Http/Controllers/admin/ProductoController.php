@@ -48,10 +48,9 @@ class ProductoController extends Controller
             'stock' => 'required|integer',
             'categoria_id' => 'required',
             'marca_id' => 'required',
-            'imagen' => 'required|image|max::2048'
+            'imagen' => 'required'
         ]);
-        $imagenes = $request->file('imagen')->store('public/imagenes');
-        $url = Storage::url($imagenes);
+
 
         Producto::Create([
             'nombre' => $request->nombre,
@@ -60,7 +59,7 @@ class ProductoController extends Controller
             'marca_id' => $request->marca_id,
             'precio' => $request->precio,
             'stock' => $request->stock,         
-            'imagen' => $url
+            'imagen' => $request->imagen
         ]);
         return redirect()->route('admin.productos.index')->with('info', 'El Producto se ha registrado correctamente');
    
@@ -104,6 +103,7 @@ class ProductoController extends Controller
             'descripcion' => 'required',
             'precio' => 'required|numeric',
             'stock' => 'required|integer',
+            'imagen' => 'required'
         ]);
 
         $data = $request->only('id','nombre', 'descripcion', 'precio', 'stock');
@@ -120,9 +120,7 @@ class ProductoController extends Controller
                 }
         }else{
             $data = $request->all();
-            $imagen = $request->file('imagen')->store('public/imagenes');
-            $url = Storage::url($imagen);
-            $data['imagen'] = $url;
+            $data['imagen'] = $request->imagen;
         }
 
         $producto->update($data);

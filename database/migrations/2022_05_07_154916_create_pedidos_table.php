@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('direccion');
             $table->string('estado');
+            $table->string('estado_pago');
             $table->dateTime('fecha_entrega')->nullable();
             $table->dateTime('fecha_pedido')->nullable();
             $table->float('total',9,2)->nullable();

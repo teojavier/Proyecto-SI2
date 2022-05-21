@@ -73,24 +73,21 @@ class UserSeeder extends Seeder
 
         
         Categoria::create([
-            'nombre' => 'Frutas'
+            'nombre' => 'Electrodomesticos'
         ]);
 
         Categoria::create([
-            'nombre' => 'Verduras'
+            'nombre' => 'Muebles'
         ]);
 
         Categoria::create([
-            'nombre' => 'Lacteos'
+            'nombre' => 'Ropa'
         ]);
 
         Categoria::create([
             'nombre' => 'Juguetes'
         ]);
 
-        Categoria::create([
-            'nombre' => 'Ropa'
-        ]);
 
         Categoria::create([
             'nombre' => 'Herramientas'
@@ -106,6 +103,28 @@ class UserSeeder extends Seeder
 
         Marca::create([
             'nombre' => 'Xiaomi'
+        ]);
+
+        Marca::create([
+            'nombre' => 'Lego'
+        ]);
+
+        Marca::create([
+            'nombre' => 'Toy House'
+        ]);
+
+        Marca::create([
+            'nombre' => 'Arpel'
+        ]);
+
+        
+        Marca::create([
+            'nombre' => 'Nike'
+        ]);
+
+        
+        Marca::create([
+            'nombre' => 'Adidas'
         ]);
 
         Proveedor::create([

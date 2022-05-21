@@ -8,6 +8,9 @@ use App\Models\detalle_pedido;
 use App\Models\Marca;
 use App\Models\Pedido;
 use App\Models\Producto;
+use App\Models\Promocion;
+use App\Models\Tipo_envio;
+use App\Models\Tipo_pago;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,6 +27,7 @@ class detalle_pedidoController extends Controller
         $productos = Producto::all();
         $pedidos = Pedido::all();
         $clientes = User::all();
+        
         return view('admin.detallePedido.indexGeneral', compact('detalles', 'productos', 'pedidos', 'clientes'));
 
     }
@@ -61,7 +65,12 @@ class detalle_pedidoController extends Controller
         $pedido = Pedido::where('id', $id)->first();
         $cliente = User::where('id', $pedido->cliente_id)->first();
         $productos = Producto::all();
-        return view('admin.detallePedido.index', compact('detalles', 'cliente', 'pedido', 'productos'));
+
+        $tipopagos = Tipo_pago::all();
+        $tipoenvios = Tipo_envio::all();
+        $promociones = Promocion::all();
+        $clientes = User::all();
+        return view('admin.detallePedido.index', compact('detalles', 'cliente', 'pedido', 'productos','tipopagos', 'tipoenvios', 'promociones', 'clientes'));
     }
 
     /**
@@ -70,9 +79,10 @@ class detalle_pedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+      $detalle = detalle_pedido::find($id);
+      $productos = Producto::all();
+      return view('admin.detallePedido.edit', compact('detalle', 'productos'));
     }
 
     /**
@@ -82,9 +92,36 @@ class detalle_pedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
+        $request->validate([
+            'cantidad' => 'required|integer',
+        ]);
+        $detalle = detalle_pedido::find($id);
+        $pedido = Pedido::where('id', $detalle->pedido_id)->first();
+        $producto = Producto::where('id', $detalle->producto_id)->first();
+
+        if($request->cantidad > $producto->stock){
+            return back()->with('info2', 'No hay suficiente Stock de: '. $producto->nombre);
+        }
+        //actualizo el producto
+        $producto->stock = $producto->stock + $detalle->cantidad; //devolvemos la cantidad
+        $producto->stock = $producto->stock - $request->cantidad; //actualizamos el stock
+
+        //actualizar el precio del pedido
+        $precio = $request->cantidad * $producto->precio; //nuevo precio del detalle
+        $pedido->total = $pedido->total - $detalle->precio;
+        $pedido->total = $pedido->total + $precio;
+
+        //actualizar detalle
+        $detalle->cantidad = $request->cantidad;
+        $detalle->precio = $precio;
+
+        $producto->save();
+        $pedido->save();
+        $detalle->save();
+        return redirect()->route('admin.detalle_pedidos.show', $pedido->id)->with('info', 'Los datos se actualizaron correctamente');
+
+
     }
 
     /**
@@ -93,9 +130,18 @@ class detalle_pedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        $detalle = detalle_pedido::find($id);
+        $pedido = Pedido::where('id',$detalle->pedido_id)->first();
+        $producto = Producto::where('id', $detalle->producto_id)->first();
+        // el producto vuelve a subir
+        $producto->stock = $producto->stock + $detalle->cantidad;
+        //el total del pedido baja
+        $pedido->total = $pedido->total - $detalle->precio;
+        $producto->save();
+        $pedido->save();
+        $detalle->delete();
+        return back()->with('info','El detalle se ha eliminado correctamente');
     }
 
     public function indexP($id)
@@ -128,7 +174,16 @@ class detalle_pedidoController extends Controller
         $producto->stock = $producto->stock - $detalle->cantidad;
         $producto->save();
         $detalle->save();
+        //Pedido Total
+        $pedido->total = $pedido->total + $detalle->precio;
+        $pedido->save();
         return redirect()->route('admin.detalle_pedidos.indexP', $pedido->id)->with('info', 'Producto Agregado correctamente');
 
     }
+
+    public function editGeneral($id){
+        $detalle = detalle_pedido::find($id);
+        $productos = Producto::all();
+        return view('admin.detallePedido.editarGeneral', compact('detalle', 'productos'));
+      }
 }

@@ -16,6 +16,7 @@
 @stop
 
 @section('content')
+<br>
     @if (session('info'))
         <div class="alert alert-success">
             <strong> {{ session('info') }}</strong>
@@ -32,7 +33,6 @@
                     <th>Precio Producto</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
-                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -65,9 +65,23 @@
                         @endforeach
                         <td>{{ $detalle->cantidad }}</td>
                         <td>{{ $detalle->precio }}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td width="10px">
+                            <a class="btn btn-outline-primary" href="{{ route('admin.detalle_pedidos.editGeneral', $detalle->id) }}">
+                                <i class="material-icons fa fa-pen"></i>
+                            </a>
+                        </td>
+
+                        <td width="10px">
+                            <form action="{{ route('admin.detalle_pedidos.destroy', $detalle->id) }}" method="POST"
+                                onsubmit="return confirm('¿Estas seguro de eliminar este a {{ $detalle->id }}?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-outline-danger" type="" rel="tooltip">
+                                    <i class="material-icons fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+
 
                     </tr>
                 @endforeach

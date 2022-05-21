@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->float('precio',9,2);
             $table->integer('stock');
-            $table->string('imagen');
+            $table->text('imagen');
             $table->unsignedBigInteger('categoria_id')->nullable()->foreign('categoria_id')->references('id')->on('categorias')->onDelete('set null');
             $table->unsignedBigInteger('marca_id')->nullable()->foreign('marca_id')->references('id')->on('marcas')->onDelete('set null');
             $table->timestamps();

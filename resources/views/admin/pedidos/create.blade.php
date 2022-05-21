@@ -13,6 +13,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
+                    <div class="card-header bg-secondary">
+                        <h4><strong>Datos</strong></h1>
+                    </div>
                     <div class="card-body">
 
                         {!! Form::open(['route' => 'admin.pedidos.store', 'autocomplete' => 'off']) !!}
