@@ -19,7 +19,7 @@ class PDFController extends Controller
         $date = date('d/m/Y');
         $configuracion = Configuration::find(1);
         $pdf =\PDF::loadView('admin.PDF.usuarios', compact('users', 'configuracion', 'date'));
-        return $pdf->stream('Reporte de Usuarios.pdf');
+        return $pdf->download('Reporte de Usuarios.pdf');
     }
 
     public function PDFClientes(){
@@ -27,7 +27,7 @@ class PDFController extends Controller
         $date = date('d/m/Y');
         $configuracion = Configuration::find(1);
         $pdf =\PDF::loadView('admin.PDF.clientes', compact('users', 'configuracion', 'date'));
-        return $pdf->stream('Reporte de Clientes.pdf');
+        return $pdf->download('Reporte de Clientes.pdf');
     }
 
     public function PDFEmpleados(){
@@ -35,7 +35,7 @@ class PDFController extends Controller
         $date = date('d/m/Y');
         $configuracion = Configuration::find(1);
         $pdf =\PDF::loadView('admin.PDF.empleados', compact('users', 'configuracion', 'date'));
-        return $pdf->stream('Reporte de Empleados.pdf');
+        return $pdf->download('Reporte de Empleados.pdf');
     }
 
     public function PDFFactura($id){
@@ -56,6 +56,6 @@ class PDFController extends Controller
         $date = date('d/m/Y');
         $configuracion = Configuration::find(1);
         $pdf =\PDF::loadView('admin.PDF.factura', compact('clientes','dato','promocion', 'productos', 'detalles', 'configuracion', 'date', 'factura', 'pedido'));
-        return $pdf->stream('Factura.pdf');
+        return $pdf->download('Factura.pdf');
     }
 }
