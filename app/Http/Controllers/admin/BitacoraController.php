@@ -106,10 +106,10 @@ class BitacoraController extends Controller
         
         $content .= "\n";
         $content .= "EMPRESA: $configuracion->razon_social                       NIT  :2995623 \n";
-        $content .= 'FECHA ='.  $DateAndTime.'                      TELF :'. $configuracion->telefono ;
+        $content .= 'FECHA DE IMPRESION='.  $DateAndTime.'                      TELFONO :'. $configuracion->telefono ;
         $content .= "                                                    \n";
         $content .= "\n";
-        $content .= "ORDEN DE INFORMACION = ID_BITACORA|USUARIO|ACCION|APARTADO|ID AFECTADO|FECHA-HORA|DIRECCION-IP \n";
+        $content .= "_ID_|USUARIO|ACCION|TABLA|ID AFECTADO|FECHA-HORA|DIRECCION-IP \n";
         $content .= "\n";
         $content .= "-----------------------------LOG----------------------------------\n";
 

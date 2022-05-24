@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmpleadoController extends Controller
 {
@@ -60,6 +62,18 @@ class EmpleadoController extends Controller
             'tipo' => 'Empleado'
         ]);
 
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Registró');
+        $bita->apartado = encrypt('Usuario');
+        $afectado = $empleado->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
+
         return redirect()->route('admin.empleados.index')->with('info', 'El Empelado: '. $empleado->name .' se registro correctamente');
 
     }
@@ -114,6 +128,19 @@ class EmpleadoController extends Controller
              $data['password'] = bcrypt($request->password);
         }
         $empleado->update($data);
+
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Editó');
+        $bita->apartado = encrypt('Usuario');
+        $afectado = $empleado->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
+
         return redirect()->route('admin.empleados.edit', $empleado->id)->with('info', 'Los datos se editaron correctamente');
 
     }
@@ -124,9 +151,22 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         $empleado = User::find($id);
+        
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Eliminó');
+        $bita->apartado = encrypt('Usuario');
+        $afectado = $empleado->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
+
         $empleado->delete();
         return back()->with('info','El Empleado '. $empleado->name .' se ha eliminado correctamente');
     }

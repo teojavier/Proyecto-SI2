@@ -56,6 +56,17 @@ class ClienteController extends Controller
             'ci' => $request->ci,
             'tipo' => 'Cliente'
         ]);
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Registró');
+        $bita->apartado = encrypt('Usuario');
+        $afectado = $cliente->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
 
         return redirect()->route('admin.clientes.index')->with('info', 'El Cliente: '. $cliente->name .' se registro correctamente');
 
@@ -110,6 +121,18 @@ class ClienteController extends Controller
              $data['password'] = bcrypt($request->password);
         }
         $cliente->update($data);
+        
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Editó');
+        $bita->apartado = encrypt('Usuario');
+        $afectado = $cliente->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
         return redirect()->route('admin.clientes.edit', $cliente->id)->with('info', 'Los datos se editaron correctamente');
 
     }

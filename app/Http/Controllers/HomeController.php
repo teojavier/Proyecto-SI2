@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Configuration;
+use App\Models\Marca;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,7 +31,9 @@ class HomeController extends Controller
             return view('admin.index', compact('configuration'));
         } else {
             if (auth()->user()->tipo == 'Cliente') {
-                return view('cliente.index');
+                $productos = Producto::all();
+                $marcas = Marca::all();
+                return view('cliente.index', compact('productos', 'marcas'));
             } else {
                 if (auth()->user()->tipo == 'Empleado') {
                     $configuration = Configuration::find(1);

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriaController extends Controller
 {
@@ -37,9 +39,21 @@ class CategoriaController extends Controller
         $request->validate([
             'nombre' => 'required',
         ]);
-        Categoria::Create([
+        $cater = Categoria::Create([
             'nombre' => $request->nombre,
         ]);
+
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Registró');
+        $bita->apartado = encrypt('Categoria');
+        $afectado = $cater->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
 
         return redirect()->route('admin.categorias.index')->with('info', 'La Cetegoria se ha registrado correctamente');
 
@@ -80,6 +94,19 @@ class CategoriaController extends Controller
         ]);
 
         $categoria->update($request->all());
+
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Editó');
+        $bita->apartado = encrypt('Categoria');
+        $afectado = $categoria->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
+
         return redirect()->route('admin.categorias.edit', $categoria)->with('info', 'Los Datos se Editaron correctamente');
     }
 
@@ -89,8 +116,19 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria){
+    public function destroy(Request $request,Categoria $categoria){
         $categoria->delete();
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Eliminó');
+        $bita->apartado = encrypt('Categoria');
+        $afectado = $categoria->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
         return back()->with('info','La Categoria ha sido eliminada correctamente');
     }
 }
