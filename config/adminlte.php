@@ -256,7 +256,7 @@ return [
         
                 [
                     'text' => 'Bitácora',
-                    'route'  => 'Bitacora.index',
+                    'route'  => 'bitacora.downloadTxt',
                     'icon' => 'fas fa-fw fa-street-view',
                     
                 ],

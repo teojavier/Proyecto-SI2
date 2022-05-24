@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoredUserRequest;
+use App\Models\Bitacora;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 
 class UserController extends Controller
@@ -44,10 +46,17 @@ class UserController extends Controller
         $user->save();
         $user->roles()->sync($request->roles);
 
-        activity()->useLog('Usuarios')->log('Registró')->subject();
-        $lastActivity=Activity::all()->last();
-        $lastActivity->subject_id= $user->id;
-        $lastActivity->save();
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Registró');
+        $bita->apartado = encrypt('Usuario');
+        $afectado = $user->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
 
 
 
@@ -115,16 +124,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user){
+    public function destroy(Request $request, User $user){
         $user->delete();
-
-        activity()->useLog('Usuarios')->log('Eliminó')->subject();
-        $lastActivity=Activity::all()->last();
-        $lastActivity->subject_id= $user->id;
-        $lastActivity->save();
-
-
-
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Eliminó');
+        $bita->apartado = encrypt('Usuario');
+        $afectado = $user->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
 
         return back()->with('info','El Usuario ha sido eliminado correctamente');
     }

@@ -60,6 +60,7 @@ Route::get('/pdf/usuarios', 'App\Http\Controllers\admin\PDFController@PDFUsuario
 Route::get('/pdf/clientes', 'App\Http\Controllers\admin\PDFController@PDFClientes')->name('admin.PDF.clientes');
 Route::get('/pdf/empleados', 'App\Http\Controllers\admin\PDFController@PDFEmpleados')->name('admin.PDF.empleados');
 Route::get('/pdf/Factura/{id}', 'App\Http\Controllers\admin\PDFController@PDFFactura')->name('admin.PDF.factura');
+Route::get('bitacora/downloadTxt', [App\Http\Controllers\admin\BitacoraController::class, 'downloadTxt'])->name('bitacora.downloadTxt');
 
 
 

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
@@ -118,9 +120,22 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         $cliente = User::find($id);
+        
+
+        $bita = new Bitacora();
+        $bita->accion = encrypt('Eliminó');
+        $bita->apartado = encrypt('Usuario');
+        $afectado = $cliente->id;
+        $bita->afectado = encrypt($afectado);
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = encrypt($ip);
+        $bita->save();
         $cliente->delete();
         return back()->with('info','El Cliente '. $cliente->name .' se ha eliminado correctamente');
     }

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
+use App\Models\Configuration;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
-
+use Response;
 
 
 class BitacoraController extends Controller
@@ -89,5 +92,44 @@ class BitacoraController extends Controller
     public function destroy($id)
     {
         
+    }
+
+    public function downloadTxt( Request $request)
+    {
+        $content = "";
+        $configuracion = Configuration::find(1);
+        $datas = Bitacora::all();
+        $users = User::all();
+        $DateAndTime = date('m-d-Y h:i:s a', time()); 
+
+        $content = "        		REGISTRO DE BITACORA        \n";
+        
+        $content .= "\n";
+        $content .= "EMPRESA: $configuracion->razon_social                       NIT  :2995623 \n";
+        $content .= 'FECHA ='.  $DateAndTime.'                      TELF :'. $configuracion->telefono ;
+        $content .= "                                                    \n";
+        $content .= "\n";
+        $content .= "ORDEN DE INFORMACION = ID_BITACORA|USUARIO|ACCION|APARTADO|ID AFECTADO|FECHA-HORA|DIRECCION-IP \n";
+        $content .= "\n";
+        $content .= "-----------------------------LOG----------------------------------\n";
+
+        
+        foreach ($datas as $data) {
+            foreach ($users as $user) {
+                if ($data->id_user == $user->id) {
+                    $content .= $data->id . '|' . $user->name .'|' . decrypt($data->accion). '|' . decrypt($data->apartado)  . '|' . decrypt($data->afectado) . '|' . decrypt($data->fecha_h) . '|' . decrypt($data->ip) .PHP_EOL;
+                }
+            }
+
+        }
+        $content .= "----------------------------END_LOG-------------------------------\n";
+
+        $fileName = "LOG_BITACORA.log";
+
+        return Response::make($content, 200, [
+            'Content-type' => 'text/plain',
+            'Content-Disposition' => sprintf('attachment; filename="%s"', $fileName),
+            'Content-Length' => strlen($content)
+        ]);
     }
 }
