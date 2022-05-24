@@ -1,4 +1,4 @@
-@extends('adminlte::auth.login')
+@extends('layouts.app')
 
 @section('content')
     <!-- Create By Joker Banny -->
