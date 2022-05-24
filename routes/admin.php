@@ -46,6 +46,9 @@ Route::resource('facturas', FacturaController::class)->names('admin.facturas');
 
 Route::get('pedidos/entregado/{id}',[PedidoController::class,'entregado'])->name('admin.pedidos.entregado');
 Route::get('pedidos/espera/{id}',[PedidoController::class,'espera'])->name('admin.pedidos.espera');
+Route::post('pedidos/create_factura/{id}',[PedidoController::class,'CreateFactura'])->name('admin.pedidos.CreateFactura');
+Route::post('pedidos/DestroyFactura/{id}',[PedidoController::class,'DestroyFactura'])->name('admin.pedidos.DestroyFactura');
+
 
 
 Route::get('detalle_pedidos/Productos/{id}',[detalle_pedidoController::class,'indexP'])->name('admin.detalle_pedidos.indexP');
@@ -56,6 +59,7 @@ Route::get('detalle_pedidos/editGeneral/{id}',[detalle_pedidoController::class,'
 Route::get('/pdf/usuarios', 'App\Http\Controllers\admin\PDFController@PDFUsuarios')->name('admin.PDF.usuarios');
 Route::get('/pdf/clientes', 'App\Http\Controllers\admin\PDFController@PDFClientes')->name('admin.PDF.clientes');
 Route::get('/pdf/empleados', 'App\Http\Controllers\admin\PDFController@PDFEmpleados')->name('admin.PDF.empleados');
+Route::get('/pdf/Factura/{id}', 'App\Http\Controllers\admin\PDFController@PDFFactura')->name('admin.PDF.factura');
 
 
 

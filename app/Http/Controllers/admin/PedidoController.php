@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
+use App\Models\Configuration;
 use App\Models\detalle_pedido;
+use App\Models\Factura;
 use App\Models\Marca;
 use App\Models\Pedido;
 use App\Models\Producto;
@@ -146,6 +148,50 @@ class PedidoController extends Controller
         $pedido->save();
         return back()->with('info','Cambio de estado a En Espera');
     }
+    
+    public function CreateFactura($id){
+        $config = Configuration::find(1);
+        $pedido = Pedido::find($id);
+        $facts = Factura::all();
+        foreach ($facts as $key) {
+            if($key->pedido_id == $pedido->id){
+                return back()->with('info','La Factura ya ha sido Creada');
+            }
+        }
+    
+        $factura = new Factura();
+        $factura->nit = $config->factura;
+        $factura->pago_neto = $pedido->total;
+        $factura->pedido_id = $id;
+        $verif = $pedido->promocion_id;
+        if($pedido->total == 0){
+            return back()->with('info2','No se registraron Productos en el Pedido');
+        }
+        if (is_null($verif)) {
+            $factura->pago_total = $pedido->total;
+        }else{
+            $promocion = Promocion::where('id', $pedido->promocion_id)->first();
+            $vpromo = $pedido->total * ($promocion->porcentaje / 100);
+            $factura->pago_total = $pedido->total - $vpromo;
+        }
+        $factura->save();
+        $pedido->estado_pago = 'Pagado';
+        $pedido->save();
+        return redirect()->route('admin.pedidos.index')->with('info', 'Factura registrada y Pago cancelado');
 
+    }
+
+    public function DestroyFactura($id){
+
+        $pedido = Pedido::find($id)->first();
+        $factura = Factura::where('pedido_id', $pedido->id)->first();
+        $cliente = User::where('id', $pedido->cliente_id)->first();
+        $pedido->estado_pago = 'Impagado';
+        $pedido->save();
+        $factura->delete();
+        return back()->with('info','Factura: '. $factura->id .'del Pedido: '.$pedido->id.' del Cliente: '.$cliente->name.' se ha eliminado correctamente');
+  
+    }
+    
     
 }

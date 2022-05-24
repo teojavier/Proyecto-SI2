@@ -29,6 +29,12 @@
             <strong> {{ session('info') }}</strong>
         </div>
     @endif
+    @if (session('info2'))
+        <div class="alert alert-danger">
+            <strong> {{ session('info2') }}</strong>
+        </div>
+    @endif
+    
 
     <div class="card-body">
         <table class="table table-striped" id="pedidos">
@@ -68,31 +74,44 @@
                         <td>{{ $pedido->total }}</td>
                         <td>
                             @if ($pedido->estado == 'En espera')
-                            <form action="{{ route('admin.pedidos.entregado', $pedido->id) }}" method="GET"
-                                onsubmit="return confirm('¿Se ha entregado el pedido: {{ $pedido->id }}?')">
-                                @csrf
-                                <button class="btn btn-warning btn-sm" type="" rel="tooltip">
-                                    {{ $pedido->estado }}
-                                </button>
-                            </form>
-
+                                <form action="{{ route('admin.pedidos.entregado', $pedido->id) }}" method="GET"
+                                    onsubmit="return confirm('¿Se ha entregado el pedido: {{ $pedido->id }}?')">
+                                    @csrf
+                                    <button class="btn btn-warning btn-sm" type="" rel="tooltip">
+                                        {{ $pedido->estado }}
+                                    </button>
+                                </form>
                             @endif
                             @if ($pedido->estado == 'Entregado')
-                            <form action="{{ route('admin.pedidos.espera', $pedido->id) }}" method="GET"
-                                onsubmit="return confirm('¿Cambiar el estado del pedido: {{ $pedido->id }}?')">
-                                @csrf
-                                <button class="btn btn-success btn-sm" type="" rel="tooltip">
-                                    {{ $pedido->estado }}
-                                </button>
-                            </form>
+                                <form action="{{ route('admin.pedidos.espera', $pedido->id) }}" method="GET"
+                                    onsubmit="return confirm('¿Cambiar el estado del pedido: {{ $pedido->id }}?')">
+                                    @csrf
+                                    <button class="btn btn-success btn-sm" type="" rel="tooltip">
+                                        {{ $pedido->estado }}
+                                    </button>
+                                </form>
                             @endif
                         </td>
+
+
                         <td>
                             @if ($pedido->estado_pago == 'Impagado')
-                                <a class="btn btn-warning btn-sm" href="#" role="button">{{ $pedido->estado_pago }}</a>
+                                <form action="{{ route('admin.pedidos.CreateFactura', $pedido->id) }}" method="POST"
+                                    onsubmit="return confirm('¿Seguro de confirmar Pago del Pedido: {{ $pedido->id }}?')">
+                                    @csrf
+                                    <button class="btn btn-warning btn-sm" type="" rel="tooltip">
+                                        {{ $pedido->estado_pago }}
+                                    </button>
+                                </form>
                             @endif
                             @if ($pedido->estado_pago == 'Pagado')
-                                <a class="btn btn-success btn-sm" href="#" role="button">{{ $pedido->estado_pago }}</a>
+                            <form action="{{ route('admin.pedidos.DestroyFactura', $pedido->id) }}" method="POST"
+                                onsubmit="return confirm('¿Seguro de Cancelar el Pago del Pedido: {{ $pedido->id }}?')">
+                                @csrf
+                                <button class="btn btn-success btn-sm" type="" rel="tooltip">
+                                    {{ $pedido->estado_pago }}
+                                </button>
+                            </form>
                             @endif
                         </td>
                         <td width="10px">
