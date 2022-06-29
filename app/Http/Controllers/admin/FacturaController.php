@@ -52,6 +52,7 @@ class FacturaController extends Controller
         $config = Configuration::find(1);
         $pedido = Pedido::find($request->pedido_id);
         $facts = Factura::all();
+        
         foreach ($facts as $key) {
             if($key->pedido_id == $pedido->id){
                 return back()->with('info','La Factura ya ha sido Creada');

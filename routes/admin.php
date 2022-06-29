@@ -10,7 +10,7 @@ use App\Http\Controllers\admin\CategoriaController;
 use App\Http\Controllers\admin\ClienteController;
 use App\Http\Controllers\admin\MarcaController;
 use App\Http\Controllers\admin\ProveedorController;
-use App\Http\Controllers\admin\detalle_productoController;
+use App\Http\Controllers\admin\Detalle_productoController;
 use App\Http\Controllers\admin\PedidoController;
 use App\Http\Controllers\admin\FacturaController;
 use App\Http\Controllers\admin\Tipo_envioController;
@@ -30,7 +30,7 @@ Route::resource('productos', ProductoController::class)->names('admin.productos'
 Route::resource('categorias', CategoriaController::class)->names('admin.categorias');
 Route::resource('marcas', MarcaController::class)->names('admin.marcas');
 Route::resource('proveedores', ProveedorController::class)->names('admin.proveedores');
-Route::resource('detalle_productos', detalle_productoController::class)->names('admin.detalle_productos');
+Route::resource('detalle_productos', Detalle_productoController::class)->names('admin.detalle_productos');
 Route::resource('configuracion', ConfiguracionController::class)->names('admin.configuracion');
 Route::resource('tipo_envios', Tipo_envioController::class)->names('admin.tipo_envios');
 Route::resource('tipo_pagos', Tipo_PagoController::class)->names('admin.tipo_pagos');
