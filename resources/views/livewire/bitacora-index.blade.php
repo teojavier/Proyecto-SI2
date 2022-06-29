@@ -53,11 +53,7 @@
                         @foreach ($bitacoras as $actividad)
                             <tr>
                                 <td>{{ $actividad->id }}</td>
-                                <?php $username = DB::table('Users')
-                                    ->where('id', $actividad->id_user)
-                                    ->value('name');
-                                ?>
-                                <td>{{ $username }}</td>
+                                <td>name</td>
                                 <td>{{ $actividad->accion }}</td>
                                 <td>{{ $actividad->apartado }}</td>
                                 <td>{{ $actividad->afectado }}</td>
