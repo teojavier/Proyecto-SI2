@@ -255,8 +255,15 @@ return [
                 ],
         
                 [
-                    'text' => 'Bitácora',
+                    'text' => 'Imprimir Bitacora',
                     'route'  => 'bitacora.downloadTxt',
+                    'icon' => 'fas fa-fw fa-street-view',
+                    
+                ],
+
+                [
+                    'text' => 'Bitácora Dinamica',
+                    'route'  => 'Bitacora.index',
                     'icon' => 'fas fa-fw fa-street-view',
                     
                 ],

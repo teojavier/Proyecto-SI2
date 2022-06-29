@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Marca;
+use Illuminate\Support\Facades\Auth;
 
 class ProductoController extends Controller
 {
@@ -52,7 +54,7 @@ class ProductoController extends Controller
         ]);
 
 
-        Producto::Create([
+        $producto = Producto::Create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
             'categoria_id' => $request->categoria_id,
@@ -61,6 +63,19 @@ class ProductoController extends Controller
             'stock' => $request->stock,         
             'imagen' => $request->imagen
         ]);
+
+        $bita = new Bitacora();
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Producto';
+        $afectado = $producto->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return redirect()->route('admin.productos.index')->with('info', 'El Producto se ha registrado correctamente');
    
     }
@@ -124,6 +139,18 @@ class ProductoController extends Controller
         }
 
         $producto->update($data);
+
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Producto';
+        $afectado = $producto->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
         
         return redirect()->route('admin.productos.edit', $producto)->with('info', 'Se editaron los datos correctamente');
         
@@ -135,8 +162,21 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto){
+    public function destroy(Request $request, Producto $producto){
         $producto->delete();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Producto';
+        $afectado = $producto->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return back()->with('info','El Producto ha sido eliminado correctamente');
     }
 }

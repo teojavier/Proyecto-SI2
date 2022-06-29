@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use Illuminate\Http\Request;
 use App\Models\Proveedor;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\detalle_productos;
+use Illuminate\Support\Facades\Auth;
 
 class ProveedorController extends Controller
 {
@@ -43,11 +45,23 @@ class ProveedorController extends Controller
             'direccion' => 'required',
             'telefono' => 'required',
         ]);
-        Proveedor::Create([
+        $proveedor = Proveedor::Create([
             'nombre' => $request->nombre,
             'direccion' => $request->direccion,
             'telefono' => $request->telefono,
         ]);
+
+        $bita = new Bitacora();
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Proveedor';
+        $afectado = $proveedor->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
 
         return redirect()->route('admin.proveedores.index')->with('info', 'El Proveedor se ha registrado correctamente');
 
@@ -96,6 +110,19 @@ class ProveedorController extends Controller
         $proveedor->direccion = $request->direccion;
         $proveedor->telefono = $request->telefono;
         $proveedor->save();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Proveedor';
+        $afectado = $proveedor->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return redirect()->route('admin.proveedores.edit', $proveedor)->with('info', 'los datos se editaron correctamente');
 
     }
@@ -106,9 +133,22 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy(Request $request, $id){
         $proveedor = Proveedor::find($id);
         $proveedor->delete();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Proveedor';
+        $afectado = $proveedor->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return back()->with('info','El Proveedor ha sido eliminado correctamente');
     }
 }

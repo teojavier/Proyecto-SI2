@@ -93,6 +93,14 @@ class UserSeeder extends Seeder
             'nombre' => 'Herramientas'
         ]);
 
+        Categoria::create([
+            'nombre' => 'Limpieza'
+        ]);
+
+        Categoria::create([
+            'nombre' => 'Cocina'
+        ]);
+
         Marca::create([
             'nombre' => 'Samsung'
         ]);
@@ -125,6 +133,14 @@ class UserSeeder extends Seeder
         
         Marca::create([
             'nombre' => 'Adidas'
+        ]);
+
+        Marca::create([
+            'nombre' => 'Huggies'
+        ]);
+
+        Marca::create([
+            'nombre' => 'Glad'
         ]);
 
         Proveedor::create([
@@ -262,5 +278,74 @@ class UserSeeder extends Seeder
             'porcentaje' => 8
         ]);
 
+        Producto::create([
+            'nombre' => 'Tenis',
+            'descripcion' => 'Zapatos deportivos',
+            'precio' => 120,
+            'stock' => 50,
+            'imagen' => 'https://www.360-javascriptviewer.com/embed?presentation=eyJtYWluSW1hZ2VVcmwiOiJodHRwczovL2NkbjEuMzYwLWphdmFzY3JpcHR2aWV3ZXIuY29tL2ltYWdlcy9ibHVlLXNob2Utc21hbGwvMjAxODA5MDYtMDAxLWJsYXV3LmpwZyIsImxpY2Vuc2UiOiIiLCJzcGVlZCI6OTAsImltYWdlVXJsRm9ybWF0IjoiMjAxODA5MDYtMHh4LWJsYXV3LmpwZyIsImZpcnN0SW1hZ2VOdW1iZXIiOjEsImluZXJ0aWEiOjEyLCJyZXZlcnNlIjp0cnVlLCJ6b29tIjp0cnVlLCJpbWFnZVVybHMiOltdLCJ0b3RhbEZyYW1lcyI6NzIsInN0YXJ0RnJhbWVObyI6MSwiYXV0b1JvdGF0ZSI6MSwiYXV0b1JvdGF0ZVNwZWVkIjowLCJhdXRvUm90YXRlUmV2ZXJzZSI6ZmFsc2UsInN0b3BBdEVkZ2VzIjpmYWxzZSwiYXV0b0NETlJlc2l6ZXIiOnRydWUsIm5vdGlmaWNhdGlvbkNvbmZpZyI6eyJkcmFnVG9Sb3RhdGUiOnsic2hvd1N0YXJ0VG9Sb3RhdGVEZWZhdWx0Tm90aWZpY2F0aW9uIjp0cnVlLCJtYWluQ29sb3IiOiJyZ2JhKDAsMCwwLDAuMjApIiwidGV4dENvbG9yIjoicmdiYSgyNDMsMjM3LDIzNywwLjgwKSJ9fX0=',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Zapato femenino',
+            'descripcion' => 'Zapato alto con taco ancho',
+            'precio' => 150,
+            'stock' => 50,
+            'imagen' => 'https://360viewpro.com/360/Iconasys-Turntable/360%20View%20Pro/Sample/Woman%20Shoe/Woman-Shoe-View/iframe.html',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Reloj',
+            'descripcion' => 'Hecho de plata',
+            'precio' => 350,
+            'stock' => 20,
+            'imagen' => 'https://360viewpro.com/360/Iconasys-Turntable/360%20View%20Pro/Sample/Watch/Watch-View/iframe.html',
+            'categoria_id' => 3,
+            'marca_id' => 1,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Taco',
+            'descripcion' => 'Zapato de taco alto y en punta',
+            'precio' => 165,
+            'stock' => 30,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Fashion/Pinkheel/Pinkheel.spin',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Pañales',
+            'descripcion' => 'Articulo de limpieza para las neceidades humanas',
+            'precio' => 20,
+            'stock' => 100,
+            'imagen' => 'https://rerroevi.sirv.com/Website/CPG/Diapers/Diapers.spin',
+            'categoria_id' => 6,
+            'marca_id' => 9,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Tappers',
+            'descripcion' => 'Articulo para almacenar comida',
+            'precio' => 26.5,
+            'stock' => 60,
+            'imagen' => 'https://rerroevi.sirv.com/Website/CPG/Freezerware/Freezerware.spin',
+            'categoria_id' => 7,
+            'marca_id' => 10,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Taladro',
+            'descripcion' => 'Articulo de Albañileria',
+            'precio' => 250,
+            'stock' => 10,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Industrial/Drill/Drill.spin',
+            'categoria_id' => 5,
+            'marca_id' => 3,
+        ]);
     }
 }

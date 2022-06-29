@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use App\Models\detalle_productos;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Detalle_productoController extends Controller
 {
@@ -63,6 +65,18 @@ class Detalle_productoController extends Controller
 
         $producto->stock = $producto->stock + $detalle->cantidad ;
         $producto->save();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Detalle_Producto';
+        $afectado = $detalle->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
 
         return redirect()->route('admin.detalle_productos.index')->with('info', 'La Compra se ha registrado correctamente');
 
@@ -122,6 +136,19 @@ class Detalle_productoController extends Controller
         $producto->save();
         $detalle->cantidad = $request->cantidad;
         $detalle->save();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Detalle_Producto';
+        $afectado = $detalle->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return redirect()->route('admin.detalle_productos.edit', $detalle->id)->with('info', 'Los datos se editaron correctamente');
 
 
@@ -133,7 +160,7 @@ class Detalle_productoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy(Request $request, $id){
         //buscamos y eliminamos el detalle
         $detalle = detalle_productos::where('id', $id)->first();
 
@@ -146,6 +173,18 @@ class Detalle_productoController extends Controller
         $producto->save();
 
         $detalle->delete();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Detalle_Producto';
+        $afectado = $detalle->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
         return back()->with('info','El detalle ha sido eliminado correctamente');
     }
 }

@@ -47,15 +47,15 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
 
         $bita = new Bitacora();
-        $bita->accion = encrypt('Registró');
-        $bita->apartado = encrypt('Usuario');
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Usuario';
         $afectado = $user->id;
-        $bita->afectado = encrypt($afectado);
+        $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
-        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->fecha_h = $fecha_hora;
         $bita->id_user = Auth::user()->id;
         $ip = $request->ip();
-        $bita->ip = encrypt($ip);
+        $bita->ip = $ip;
         $bita->save();
 
 
@@ -109,10 +109,7 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
 
 
-        activity()->useLog('Usuarios')->log('Editó')->subject();
-        $lastActivity=Activity::all()->last();
-        $lastActivity->subject_id= $user->id;
-        $lastActivity->save();
+
 
         return redirect()->route('admin.users.edit', $user)->with('info', 'Se editaron los datos correctamente');
         
@@ -127,15 +124,15 @@ class UserController extends Controller
     public function destroy(Request $request, User $user){
         $user->delete();
         $bita = new Bitacora();
-        $bita->accion = encrypt('Eliminó');
-        $bita->apartado = encrypt('Usuario');
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Usuario';
         $afectado = $user->id;
-        $bita->afectado = encrypt($afectado);
+        $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
-        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->fecha_h = $fecha_hora;
         $bita->id_user = Auth::user()->id;
         $ip = $request->ip();
-        $bita->ip = encrypt($ip);
+        $bita->ip = $ip;
         $bita->save();
 
         return back()->with('info','El Usuario ha sido eliminado correctamente');

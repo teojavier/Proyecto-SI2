@@ -57,15 +57,15 @@ class ClienteController extends Controller
             'tipo' => 'Cliente'
         ]);
         $bita = new Bitacora();
-        $bita->accion = encrypt('Registró');
-        $bita->apartado = encrypt('Usuario');
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Usuario';
         $afectado = $cliente->id;
-        $bita->afectado = encrypt($afectado);
+        $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
-        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->fecha_h = $fecha_hora;
         $bita->id_user = Auth::user()->id;
         $ip = $request->ip();
-        $bita->ip = encrypt($ip);
+        $bita->ip = $ip;
         $bita->save();
 
         return redirect()->route('admin.clientes.index')->with('info', 'El Cliente: '. $cliente->name .' se registro correctamente');
@@ -123,15 +123,15 @@ class ClienteController extends Controller
         $cliente->update($data);
         
         $bita = new Bitacora();
-        $bita->accion = encrypt('Editó');
-        $bita->apartado = encrypt('Usuario');
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Usuario';
         $afectado = $cliente->id;
-        $bita->afectado = encrypt($afectado);
+        $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
-        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->fecha_h = $fecha_hora;
         $bita->id_user = Auth::user()->id;
         $ip = $request->ip();
-        $bita->ip = encrypt($ip);
+        $bita->ip = $ip;
         $bita->save();
         return redirect()->route('admin.clientes.edit', $cliente->id)->with('info', 'Los datos se editaron correctamente');
 
@@ -149,15 +149,15 @@ class ClienteController extends Controller
         
 
         $bita = new Bitacora();
-        $bita->accion = encrypt('Eliminó');
-        $bita->apartado = encrypt('Usuario');
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Usuario';
         $afectado = $cliente->id;
-        $bita->afectado = encrypt($afectado);
+        $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
-        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->fecha_h = $fecha_hora;
         $bita->id_user = Auth::user()->id;
         $ip = $request->ip();
-        $bita->ip = encrypt($ip);
+        $bita->ip = $ip;
         $bita->save();
         $cliente->delete();
         return back()->with('info','El Cliente '. $cliente->name .' se ha eliminado correctamente');

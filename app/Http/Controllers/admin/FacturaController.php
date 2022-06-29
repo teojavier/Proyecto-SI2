@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use App\Models\Configuration;
 use App\Models\Factura;
 use App\Models\Pedido;
 use App\Models\Promocion;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FacturaController extends Controller
 {
@@ -74,6 +76,19 @@ class FacturaController extends Controller
         $factura->save();
         $pedido->estado_pago = 'Pagado';
         $pedido->save();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Factura';
+        $afectado = $factura->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return redirect()->route('admin.facturas.index')->with('info', 'Factura Registrada');
 
     }
@@ -119,7 +134,7 @@ class FacturaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy(Request $request, $id){
         
         $factura = Factura::find($id);
         $pedido = Pedido::where('id', $factura->pedido_id)->first();
@@ -127,6 +142,19 @@ class FacturaController extends Controller
         $pedido->estado_pago = 'Impagado';
         $pedido->save();
         $factura->delete();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Factura';
+        $afectado = $factura->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return back()->with('info','Factura: '. $factura->id .' del Pedido: '.$pedido->id.' del Cliente: '.$cliente->name.' se ha eliminado correctamente');
   
     }

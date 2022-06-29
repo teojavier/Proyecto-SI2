@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use App\Models\Promocion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PromocionController extends Controller
 {
@@ -39,10 +41,23 @@ class PromocionController extends Controller
             'nombre' => 'required',
             'porcentaje' => 'required|numeric|between:0,99.99'
         ]);
-        Promocion::Create([
+        $promocion = Promocion::Create([
             'nombre' => $request->nombre,
             'porcentaje' => $request->porcentaje,
         ]);
+
+        $bita = new Bitacora();
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Promoción';
+        $afectado = $promocion->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return redirect()->route('admin.promociones.index')->with('info', 'La Promocion se ha registrado correctamente');
 
     }
@@ -86,6 +101,19 @@ class PromocionController extends Controller
         $promocion->nombre = $request->nombre;
         $promocion->porcentaje = $request->porcentaje;
         $promocion->save();
+        
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Promoción';
+        $afectado = $promocion->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return redirect()->route('admin.promociones.edit', $promocion)->with('info', 'los datos se editaron correctamente');
 
     }
@@ -96,10 +124,23 @@ class PromocionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $promocion = Promocion::find($id);
         $promocion->delete();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Promoción';
+        $afectado = $promocion->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return back()->with('info','La Promocion ha sido eliminado correctamente');
     }
 }

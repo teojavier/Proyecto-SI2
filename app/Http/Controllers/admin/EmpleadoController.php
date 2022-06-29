@@ -63,15 +63,15 @@ class EmpleadoController extends Controller
         ]);
 
         $bita = new Bitacora();
-        $bita->accion = encrypt('Registró');
-        $bita->apartado = encrypt('Usuario');
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Usuario';
         $afectado = $empleado->id;
-        $bita->afectado = encrypt($afectado);
+        $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
-        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->fecha_h = $fecha_hora;
         $bita->id_user = Auth::user()->id;
         $ip = $request->ip();
-        $bita->ip = encrypt($ip);
+        $bita->ip = $ip;
         $bita->save();
 
         return redirect()->route('admin.empleados.index')->with('info', 'El Empelado: '. $empleado->name .' se registro correctamente');
@@ -130,15 +130,15 @@ class EmpleadoController extends Controller
         $empleado->update($data);
 
         $bita = new Bitacora();
-        $bita->accion = encrypt('Editó');
-        $bita->apartado = encrypt('Usuario');
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Usuario';
         $afectado = $empleado->id;
-        $bita->afectado = encrypt($afectado);
+        $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
-        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->fecha_h = $fecha_hora;
         $bita->id_user = Auth::user()->id;
         $ip = $request->ip();
-        $bita->ip = encrypt($ip);
+        $bita->ip = $ip;
         $bita->save();
 
         return redirect()->route('admin.empleados.edit', $empleado->id)->with('info', 'Los datos se editaron correctamente');
@@ -156,15 +156,15 @@ class EmpleadoController extends Controller
         $empleado = User::find($id);
         
         $bita = new Bitacora();
-        $bita->accion = encrypt('Eliminó');
-        $bita->apartado = encrypt('Usuario');
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Usuario';
         $afectado = $empleado->id;
-        $bita->afectado = encrypt($afectado);
+        $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
-        $bita->fecha_h = encrypt($fecha_hora);
+        $bita->fecha_h = $fecha_hora;
         $bita->id_user = Auth::user()->id;
         $ip = $request->ip();
-        $bita->ip = encrypt($ip);
+        $bita->ip = $ip;
         $bita->save();
 
         $empleado->delete();

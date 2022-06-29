@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use App\Models\Configuration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConfiguracionController extends Controller
 {
@@ -73,6 +75,19 @@ class ConfiguracionController extends Controller
         $configuracion = Configuration::find($id);
         $configuracion->update($request->all());
         $configuracion->save();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Configuracion';
+        $afectado = $configuracion->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return redirect()->route('admin.configuracion.index')->with('info', 'Los Datos se editaron correctamente');
 
 

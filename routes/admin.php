@@ -20,6 +20,7 @@ use App\Http\Controllers\admin\detalle_pedidoController;
 use App\Http\Controllers\admin\EmpleadoController;
 use App\Http\Controllers\admin\PromocionController;
 
+
 Route::get('',[HomeController::class, 'index'])->name('admin.home');
 
 Route::resource('perfil', PerfilController::class)->names('admin.perfil');
@@ -55,11 +56,16 @@ Route::get('detalle_pedidos/Productos/{id}',[detalle_pedidoController::class,'in
 Route::post('detalle_pedidos/Store_Productos/{id}',[detalle_pedidoController::class,'storeP'])->name('admin.detalle_pedidos.storeP');
 Route::get('detalle_pedidos/editGeneral/{id}',[detalle_pedidoController::class,'editGeneral'])->name('admin.detalle_pedidos.editGeneral');
 
+//Buscar bitacora dinamica
+Route::get('BitacoraDinamica',[BitacoraController::class,'textBitacora'])->name('admin.bitacora.textBitacora');
+
+
 //Generar PDF
 Route::get('/pdf/usuarios', 'App\Http\Controllers\admin\PDFController@PDFUsuarios')->name('admin.PDF.usuarios');
 Route::get('/pdf/clientes', 'App\Http\Controllers\admin\PDFController@PDFClientes')->name('admin.PDF.clientes');
 Route::get('/pdf/empleados', 'App\Http\Controllers\admin\PDFController@PDFEmpleados')->name('admin.PDF.empleados');
 Route::get('/pdf/Factura/{id}', 'App\Http\Controllers\admin\PDFController@PDFFactura')->name('admin.PDF.factura');
+Route::get('/pdf/bitacoraPDF', 'App\Http\Controllers\admin\PDFController@PDFBitacora')->name('admin.PDF.bitacoras');
 Route::get('bitacora/downloadTxt', [App\Http\Controllers\admin\BitacoraController::class, 'downloadTxt'])->name('bitacora.downloadTxt');
 
 

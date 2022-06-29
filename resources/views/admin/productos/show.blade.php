@@ -52,7 +52,7 @@
                     <p class="form-control">{{$producto->stock}}</p>
                         
                     <p class="h5">Imagen: </p>
-                    <img src="{{$producto->imagen}}" width="30%" class="img-thumbnail center-block"> 
+                    <iframe height="230" width="250" scrolling="no" src="{{$producto->imagen}}" frameBorder="0" class="mx-auto d-block border border-dark"></iframe> 
 
                 </div>
                 <div class="form-group col-md-4">

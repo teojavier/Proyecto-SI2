@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use App\Models\Categoria;
 use App\Models\detalle_pedido;
 use App\Models\Marca;
@@ -13,6 +14,7 @@ use App\Models\Tipo_envio;
 use App\Models\Tipo_pago;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class detalle_pedidoController extends Controller
 {
@@ -119,6 +121,20 @@ class detalle_pedidoController extends Controller
         $producto->save();
         $pedido->save();
         $detalle->save();
+
+
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Detalle_Pedido';
+        $afectado = $detalle->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         return redirect()->route('admin.detalle_pedidos.show', $pedido->id)->with('info', 'Los datos se actualizaron correctamente');
 
 
@@ -130,7 +146,7 @@ class detalle_pedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy(Request $request, $id){
         $detalle = detalle_pedido::find($id);
         $pedido = Pedido::where('id',$detalle->pedido_id)->first();
         $producto = Producto::where('id', $detalle->producto_id)->first();
@@ -141,6 +157,20 @@ class detalle_pedidoController extends Controller
         $producto->save();
         $pedido->save();
         $detalle->delete();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Detalle_Pedido';
+        $afectado = $detalle->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
+
         return back()->with('info','El detalle se ha eliminado correctamente');
     }
 
@@ -177,6 +207,19 @@ class detalle_pedidoController extends Controller
         //Pedido Total
         $pedido->total = $pedido->total + $detalle->precio;
         $pedido->save();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Pedido';
+        $afectado = $pedido->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+        
         return redirect()->route('admin.detalle_pedidos.indexP', $pedido->id)->with('info', 'Producto Agregado correctamente');
 
     }
