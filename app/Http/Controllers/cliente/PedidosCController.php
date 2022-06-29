@@ -29,7 +29,7 @@ class PedidosCController extends Controller
     {
         $pedidos = Pedido::all();
         $clientes = User::all();
-        return view('cliente.pedidos.index', compact('pedidos', 'clientes'));
+        return view('cliente.Pedidos.index', compact('pedidos', 'clientes'));
     }
 
     /**
@@ -43,7 +43,7 @@ class PedidosCController extends Controller
         $tipoenvios = Tipo_envio::all();
         $promociones = Promocion::all();
         $clientes = Auth::user();
-        return view('cliente.pedidos.create', compact('tipopagos', 'tipoenvios', 'promociones', 'clientes'));
+        return view('cliente.Pedidos.create', compact('tipopagos', 'tipoenvios', 'promociones', 'clientes'));
     }
 
     /**
@@ -82,7 +82,7 @@ class PedidosCController extends Controller
         $bita->ip = $ip;
         $bita->save();
 
-        return redirect()->route('cliente.pedidos.index')->with('info', 'El Pedido se ha registrado correctamente');
+        return redirect()->route('cliente.Pedidos.index')->with('info', 'El Pedido se ha registrado correctamente');
 
     }
 
@@ -103,7 +103,7 @@ class PedidosCController extends Controller
         $tipoenvios = Tipo_envio::all();
         $promociones = Promocion::all();
         $clientes = User::all();
-        return view('cliente.pedidos.detalle', compact('detalles', 'cliente', 'pedido', 'productos','tipopagos', 'tipoenvios', 'promociones', 'clientes'));
+        return view('cliente.Pedidos.detalle', compact('detalles', 'cliente', 'pedido', 'productos','tipopagos', 'tipoenvios', 'promociones', 'clientes'));
  
     }
 
@@ -162,7 +162,7 @@ class PedidosCController extends Controller
         $categorias = Categoria::all();
         $marcas = Marca::all();
         $productos = Producto::paginate(3);
-        return view('cliente.pedidos.productos', compact('productos','categorias','marcas','pedido'));
+        return view('cliente.Pedidos.productos', compact('productos','categorias','marcas','pedido'));
     }
 
     public function storeP(Request $request, $idproducto){
@@ -178,7 +178,7 @@ class PedidosCController extends Controller
         $detalle->cantidad = $request->cantidad;
         //si la cantidad es mayor al stock
         if($detalle->cantidad > $producto->stock){
-            return redirect()->route('cliente.pedidos.indexP', $pedido->id)->with('info2', 'No hay suficiente Stock de: '. $producto->nombre);
+            return redirect()->route('cliente.Pedidos.indexP', $pedido->id)->with('info2', 'No hay suficiente Stock de: '. $producto->nombre);
         }
         //calcula el precio
         $detalle->precio = $request->cantidad * $producto->precio;
@@ -202,7 +202,7 @@ class PedidosCController extends Controller
         $bita->ip = $ip;
         $bita->save();
         
-        return redirect()->route('cliente.pedidos.indexP', $pedido->id)->with('info', 'Producto Agregado correctamente');
+        return redirect()->route('cliente.Pedidos.indexP', $pedido->id)->with('info', 'Producto Agregado correctamente');
 
     }
 
@@ -287,7 +287,7 @@ class PedidosCController extends Controller
         $bita->ip = $ip;
         $bita->save();
 
-        return redirect()->route('cliente.pedidos.index')->with('info', 'Factura registrada y Pago cancelado');
+        return redirect()->route('cliente.Pedidos.index')->with('info', 'Factura registrada y Pago cancelado');
 
     }
 
