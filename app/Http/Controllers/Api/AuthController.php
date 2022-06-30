@@ -21,20 +21,20 @@ class AuthController extends Controller{
             return response()->json(['message' => 'These credentials do not match our records.'], 404); */
 
         if(!DB::table('users')->where('email', $request->email)->exists()){
-            return response()->json(['message' => 'No existe este Correo Electronico'], 404);
+            return response()->json(['message' => 'Correo Electronico Inexistente'], 404);
         }
 
         $user = User::where('email', $request->email)->firstOrFail();
         //hash para ver si son iguales
-        if($user->tipo == 'paciente'){
+        if($user->tipo == 'Cliente'){
             if(Hash::check($request->password, $user->password)){
                 return $user;
             }else{
-                return response()->json(['message' => 'La contraseña es Incorrecta'], 404);
+                return response()->json(['message' => 'Contraseña Incorrecta'], 404);
             }
         }else{
             //
-            return response()->json(['message' => 'No es Cliente'], 404);
+            return response()->json(['message' => 'Rol Desconocido'], 404);
         }
     }
 }
