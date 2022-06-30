@@ -6,63 +6,35 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
-{
-    //
-    //
-    public function register(Request $request){
-        
-        //se valida la información que viene en $request
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:50',
-            'email' => 'required|string|max:80',
-            'password' => 'required|string|min:8'
-        ]);
-        
-        //se crea el usuario en la base de datos
-        $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password'])
-        ]);
-        
-        //se crea token de acceso personal para el usuario
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return $user;
-        //se devuelve una respuesta JSON con el token generado y el tipo de token
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer'
+class AuthController extends Controller{
 
+    public function login(Request $request){
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string'
         ]);
-    }
- public function login(Request $request)
-    {
-       // $validator=Validator::make($request->all(), [
-       //     'email' => ['required', 'string', 'email'],
-       //     'password' => ['required'],
-      //  ]);
-      //  if($validator->fails()){
-      //      return response()->json(['status_code'=>400,'message'=>'bad request']);
-      //  }
-//get parametros 
-//
-        $credentials=request(['email','password']);
-        if(!Auth::attempt($credentials)){
-            return response()->json(['status_code'=>500,'message'=>'Unauthorized']);
+
+        /* if($request->name = '' || $request->password == '')
+            return response()->json(['message' => 'These credentials do not match our records.'], 404); */
+
+        if(!DB::table('users')->where('email', $request->email)->exists()){
+            return response()->json(['message' => 'No existe este Correo Electronico'], 404);
         }
-        $user=User::where('email',$request->email)->first();
-        $tokenResult=$user->createToken('authToken')->plainTextToken;
-        return response()->json(['status_code'=>200,'token'=>$tokenResult]);
 
+        $user = User::where('email', $request->email)->firstOrFail();
+        //hash para ver si son iguales
+        if($user->tipo == 'paciente'){
+            if(Hash::check($request->password, $user->password)){
+                return $user;
+            }else{
+                return response()->json(['message' => 'La contraseña es Incorrecta'], 404);
+            }
+        }else{
+            //
+            return response()->json(['message' => 'No es Cliente'], 404);
+        }
     }
-
-   // public function logout(Request $request)
-   // {
-   //     $request->user()->currentAccessToken()->delete();
-   //     return response()->json(['status_code'=>200,'message'=>'token deleted']);
-
-    //}
 }
