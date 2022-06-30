@@ -101,6 +101,10 @@ class UserSeeder extends Seeder
             'nombre' => 'Cocina'
         ]);
 
+        Categoria::create([
+            'nombre' => 'Bebidas'
+        ]);
+
         Marca::create([
             'nombre' => 'Samsung'
         ]);
@@ -141,6 +145,26 @@ class UserSeeder extends Seeder
 
         Marca::create([
             'nombre' => 'Glad'
+        ]);
+
+        Marca::create([
+            'nombre' => 'SRC'
+        ]);
+        
+        Marca::create([
+            'nombre' => 'Nailpolish'
+        ]);
+
+        Marca::create([
+            'nombre' => 'Tramontina'
+        ]);
+
+        Marca::create([
+            'nombre' => 'Puma'
+        ]);
+
+        Marca::create([
+            'nombre' => 'Caterpillar'
         ]);
 
         Proveedor::create([
@@ -346,6 +370,226 @@ class UserSeeder extends Seeder
             'imagen' => 'https://rerroevi.sirv.com/Website/Industrial/Drill/Drill.spin',
             'categoria_id' => 5,
             'marca_id' => 3,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Vino',
+            'descripcion' => 'Botella de vino tinto',
+            'precio' => 30,
+            'stock' => 100,
+            'imagen' => 'https://rerroevi.sirv.com/Website/CPG/Wine/Wine.spin',
+            'categoria_id' => 8,
+            'marca_id' => 11,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Pinta Uñas',
+            'descripcion' => 'Pintura para uñas',
+            'precio' => 5,
+            'stock' => 50,
+            'imagen' => 'https://rerroevi.sirv.com/Website/CPG/Nailpolish/Nailpolish.spin',
+            'categoria_id' => 6,
+            'marca_id' => 12,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Alicate',
+            'descripcion' => 'Herramienta de metal para electricidad',
+            'precio' => 25,
+            'stock' => 30,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Electrical/Klein%20Tools/Klein%20Tools.spin',
+            'categoria_id' => 5,
+            'marca_id' => 13,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Multimetro- tester',
+            'descripcion' => 'Test de electricidad',
+            'precio' => 200,
+            'stock' => 10,
+            'imagen' => ' https://rerroevi.sirv.com/Website/Electrical/Southwire/Southwire.spin',
+            'categoria_id' => 5,
+            'marca_id' => 13,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Medidor electrico',
+            'descripcion' => 'Caja de medidor electrico',
+            'precio' => 50,
+            'stock' => 20,
+            'imagen' => 'https://rerroevi.sirv.com/Samples%20by%20Industry/Electrical/SiemensSwitch2/SiemensSwitch2.spin',
+            'categoria_id' => 5,
+            'marca_id' => 13,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Manometro',
+            'descripcion' => 'Instrumento de medición para la presión',
+            'precio' => 100,
+            'stock' => 20,
+            'imagen' => 'https://rerroevi.sirv.com/Samples%20by%20Industry/Electrical/DwyerElectrical/DwyerElectrical.spin',
+            'categoria_id' => 5,
+            'marca_id' => 13,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Interruptor-palanca',
+            'descripcion' => 'Palanca para caja electrica',
+            'precio' => 35,
+            'stock' => 25,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Electrical/CircuitBreaker/CircuitBreaker.spin',
+            'categoria_id' => 5,
+            'marca_id' => 13,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Reflector led',
+            'descripcion' => 'Iluminacion LED de jardines',
+            'precio' => 50,
+            'stock' => 20,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Electrical/Cree/Cree.spin',
+            'categoria_id' => 5,
+            'marca_id' => 13,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Gafas',
+            'descripcion' => 'Gafas de sol',
+            'precio' => 100,
+            'stock' => 20,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Fashion/Sunglasses/Sunglasses.spin',
+            'categoria_id' => 3,
+            'marca_id' => 5,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Camiseta',
+            'descripcion' => 'Camiseta de mujer',
+            'precio' => 120,
+            'stock' => 50,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Fashion/Tanktop/Tanktop.spin',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Cartera',
+            'descripcion' => 'Cartera de mujer',
+            'precio' => 200,
+            'stock' => 20,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Fashion/Pinkpurse/Pinkpurse.spin',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => ' Bolso',
+            'descripcion' => 'Bolso rojo',
+            'precio' => 150,
+            'stock' => 20,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Fashion/Ebags/Ebags.spin',
+            'categoria_id' => 3,
+            'marca_id' => 8,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Zapato',
+            'descripcion' => 'Zapato de vestir',
+            'precio' => 200,
+            'stock' => 20,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Footwear/BrownDressShoe/BrownDressShoe.spin',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Tennis',
+            'descripcion' => 'Tennis nike rojo D455',
+            'precio' => 250,
+            'stock' => 20,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Footwear/NikeZoom/NikeZoom.spin',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Tennis',
+            'descripcion' => 'Tennis puma morado L45',
+            'precio' => 300,
+            'stock' => 10,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Footwear/PUMA/PUMA.spin',
+            'categoria_id' => 3,
+            'marca_id' => 14,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Tennis',
+            'descripcion' => 'Tennis deportivo Gray',
+            'precio' => 300,
+            'stock' => 10,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Footwear/RunnigShoe/RunnigShoe.spin',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Zapato',
+            'descripcion' => 'Zapato caterpillar f45',
+            'precio' => 500,
+            'stock' => 10,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Footwear/Timberland/Timberland.spin',
+            'categoria_id' => 3,
+            'marca_id' => 15,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Zapatilla',
+            'descripcion' => ' Zapatilla colorful 38',
+            'precio' => 320,
+            'stock' => 10,
+            'imagen' => 'https://rerroevi.sirv.com/Samples%20by%20Industry/Shoes/StarWarsShoe/StarWarsShoe.spin',
+            'categoria_id' => 3,
+            'marca_id' => 7,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Licuadora',
+            'descripcion' => 'Licuadora smarthouse',
+            'precio' => 600,
+            'stock' => 10,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Animations/InstantPot%20Blender/InstantPot%20Blender.spin',
+            'categoria_id' => 1,
+            'marca_id' => 1,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Freidora',
+            'descripcion' => 'Freidora eléctrica mabe',
+            'precio' => 300,
+            'stock' => 15,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Animations/InstantPot%20Air%20Fryer/InstantPot%20Air%20Fryer.spin',
+            'categoria_id' => 1,
+            'marca_id' => 1,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Juego de ollas',
+            'descripcion' => 'Juego de ollas rojas',
+            'precio' => 100,
+            'stock' => 25,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Home%20Goods/Pots/Pots.spin',
+            'categoria_id' => 7,
+            'marca_id' => 13,
+        ]);
+
+        Producto::create([
+            'nombre' => 'Batidora eléctrica',
+            'descripcion' => 'Batidora eléctrica roja',
+            'precio' => 300,
+            'stock' => 10,
+            'imagen' => 'https://rerroevi.sirv.com/Website/Home%20Goods/Mixer/Mixer.spin',
+            'categoria_id' => 1,
+            'marca_id' => 2,
         ]);
     }
 }
