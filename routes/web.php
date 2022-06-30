@@ -45,7 +45,7 @@ Route::get('VistaCategoria/{idcategoria}/{idpedido}', function($idcategoria, $id
     $pedido = Pedido::where('id', $idpedido)->first();
     $categorias = Categoria::all();
     $marcas = Marca::all();
-    return view('cliente.pedidos.productos', compact('productos', 'marcas', 'categorias', 'pedido'));
+    return view('cliente.Pedidos.productos', compact('productos', 'marcas', 'categorias', 'pedido'));
 })->name('cliente.pedidos.indexCategoria');
 Route::delete('Eliminar/detalle/{id}',[PedidosCController::class,'DetalleDestroy'])->name('cliente.pedidos.DetalleDestroy');
 Route::post('pedidos/create_factura/{id}',[PedidosCController::class,'CreateFactura'])->name('cliente.pedidos.CreateFactura');

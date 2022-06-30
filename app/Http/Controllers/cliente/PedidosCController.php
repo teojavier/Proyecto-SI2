@@ -82,7 +82,7 @@ class PedidosCController extends Controller
         $bita->ip = $ip;
         $bita->save();
 
-        return redirect()->route('cliente.Pedidos.index')->with('info', 'El Pedido se ha registrado correctamente');
+        return redirect()->route('cliente.pedidos.index')->with('info', 'El Pedido se ha registrado correctamente');
 
     }
 
@@ -287,7 +287,7 @@ class PedidosCController extends Controller
         $bita->ip = $ip;
         $bita->save();
 
-        return redirect()->route('cliente.Pedidos.index')->with('info', 'Factura registrada y Pago cancelado');
+        return redirect()->route('cliente.pedidos.index')->with('info', 'Factura registrada y Pago cancelado');
 
     }
 
