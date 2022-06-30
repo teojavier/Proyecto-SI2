@@ -3,7 +3,7 @@
 @section('title', 'Registrar Cliente')
 
 @section('content_header')
-    <h1>Editar Nuevo Empleado: {{$empleado->name}}</h1>
+    <h1>Editar Empleado: {{$empleado->name}}</h1>
 
 @stop
 
