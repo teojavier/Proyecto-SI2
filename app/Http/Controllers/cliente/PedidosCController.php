@@ -178,7 +178,7 @@ class PedidosCController extends Controller
         $detalle->cantidad = $request->cantidad;
         //si la cantidad es mayor al stock
         if($detalle->cantidad > $producto->stock){
-            return redirect()->route('cliente.Pedidos.indexP', $pedido->id)->with('info2', 'No hay suficiente Stock de: '. $producto->nombre);
+            return redirect()->route('cliente.pedidos.indexP', $pedido->id)->with('info2', 'No hay suficiente Stock de: '. $producto->nombre);
         }
         //calcula el precio
         $detalle->precio = $request->cantidad * $producto->precio;
@@ -202,7 +202,7 @@ class PedidosCController extends Controller
         $bita->ip = $ip;
         $bita->save();
         
-        return redirect()->route('cliente.Pedidos.indexP', $pedido->id)->with('info', 'Producto Agregado correctamente');
+        return redirect()->route('cliente.pedidos.indexP', $pedido->id)->with('info', 'Producto Agregado correctamente');
 
     }
 
