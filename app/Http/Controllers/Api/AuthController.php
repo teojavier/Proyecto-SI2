@@ -37,4 +37,10 @@ class AuthController extends Controller{
             return response()->json(['message' => 'Rol Desconocido'], 404);
         }
     }
+
+    public function configuration(){
+        $datos = DB::table('configurations')->where('id',1)->first();
+        return $datos;
+    }
+
 }

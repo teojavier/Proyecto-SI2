@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('login', [AuthController::class, 'login']);
+Route::get('configuration', [AuthController::class, 'configuration']);
