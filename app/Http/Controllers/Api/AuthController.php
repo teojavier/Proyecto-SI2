@@ -43,4 +43,9 @@ class AuthController extends Controller{
         return $datos;
     }
 
+    public function Productos(){
+        $datos = DB::table('productos')->get();
+        return $datos;
+    }
+
 }
