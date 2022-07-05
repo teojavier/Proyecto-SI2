@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login']);
 Route::get('configuration', [AuthController::class, 'configuration']);
 Route::get('productos', [AuthController::class, 'productos']);
+Route::post('updatePerfil/{id}', [AuthController::class, 'UpdatePerfil']);

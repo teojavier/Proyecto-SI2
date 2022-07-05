@@ -48,4 +48,18 @@ class AuthController extends Controller{
         return $datos;
     }
 
+    public function UpdatePerfil(Request $request, $id){
+
+        $cliente = User::find($id);
+
+        $cliente->name = $request->name;
+        $cliente->email = $request->email;
+        $cliente->direccion = $request->direccion;
+        $cliente->ci = $request->ci;
+        $cliente->telefono = $request->telefono;
+        $cliente->save();
+        return $cliente;
+    }
+
+
 }
