@@ -132,11 +132,10 @@ class AuthController extends Controller{
     }
 
     public function addProducto(Request $request, $idproducto){
-        $request->validate([
-            'cantidad' => 'required|integer',
-        ]);
+
         //body: idpedido   cantidad
         //  addProducto/$idproducto
+
         $pedido = Pedido::where('id',$request->idpedido)->first();
         $producto = Producto::find($idproducto);
         $detalle = new detalle_pedido();
@@ -164,12 +163,11 @@ class AuthController extends Controller{
         $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
         $bita->fecha_h = $fecha_hora;
-        $bita->id_user = Auth::user()->id;
+        $bita->id_user = $pedido->cliente_id;
         $ip = $request->ip();
         $bita->ip = $ip;
-        //$bita->save();
-    
-        return $producto;
+        //$bita->save();*/
+        return $pedido;
 
     }
 }
