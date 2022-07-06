@@ -122,4 +122,9 @@ class AuthController extends Controller{
             return response()->json(['message' => 'Contraseñas incorrectas'], 404);;
         }
     }
+
+    public function pedidos($id){
+        $pedidos = DB::table('pedidos')->where('cliente_id', $id)->get();
+        return $pedidos;
+    }
 }
