@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bitacora;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,9 +79,47 @@ class AuthController extends Controller{
             $cliente->telefono = $request->telefono;
         }
 
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Usuario';
+        $afectado = $cliente->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = $cliente->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+
         $cliente->save();
         return $cliente;
     }
 
+    public function UpdatePassword(Request $request, $id){
+        $request->validate([
+            'newpass' => ['required','string', 'min:8'],
+            'newnewpass' => ['required','string', 'min:8']
+        ]);
 
+        if($request->newpass == $request->newnewpass ){
+            $cliente = User::find($id);
+            $cliente->password = bcrypt($request->newpass);
+            $cliente->save();
+
+            $bita = new Bitacora();
+            $bita->accion = 'Editó';
+            $bita->apartado = 'Usuario';
+            $afectado = $cliente->id;
+            $bita->afectado = $afectado;
+            $fecha_hora = date('m-d-Y h:i:s a', time()); 
+            $bita->fecha_h = $fecha_hora;
+            $bita->id_user = $cliente->id;
+            $ip = $request->ip();
+            $bita->ip = $ip;
+            //$bita->save();
+            return $cliente;
+        }else{
+            return response()->json(['message' => 'Contraseñas incorrectas'], 404);;
+        }
+    }
 }
