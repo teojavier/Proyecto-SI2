@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bitacora;
+use App\Models\detalle_pedido;
+use App\Models\Pedido;
+use App\Models\Producto;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -119,12 +122,54 @@ class AuthController extends Controller{
             //$bita->save();
             return $cliente;
         }else{
-            return response()->json(['message' => 'Contraseñas incorrectas'], 404);;
+            return response()->json(['message' => 'Contraseñas incorrectas'], 404);
         }
     }
 
     public function pedidos($id){
         $pedidos = DB::table('pedidos')->where('cliente_id', $id)->get();
         return $pedidos;
+    }
+
+    public function addProducto(Request $request, $idproducto){
+        $request->validate([
+            'cantidad' => 'required|integer',
+        ]);
+        //body: idpedido   cantidad
+        //  addProducto/$idproducto
+        $pedido = Pedido::where('id',$request->idpedido)->first();
+        $producto = Producto::find($idproducto);
+        $detalle = new detalle_pedido();
+        $detalle->producto_id = $idproducto;
+        $detalle->pedido_id = $request->idpedido;
+        $detalle->cantidad = $request->cantidad;
+        //si la cantidad es mayor al stock
+        if($detalle->cantidad > $producto->stock){
+            return response()->json(['message' => 'No hay suficiente Stock de: '. $producto->nombre], 404);
+        }
+        //calcula el precio
+        $detalle->precio = $request->cantidad * $producto->precio;
+        //descuenta stock de productos
+        $producto->stock = $producto->stock - $detalle->cantidad;
+        //$producto->save();
+        //$detalle->save();
+        //Pedido Total
+        $pedido->total = $pedido->total + $detalle->precio;
+        //$pedido->save();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Editó';
+        $bita->apartado = 'Pedido';
+        $afectado = $pedido->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        //$bita->save();
+    
+        return $producto;
+
     }
 }

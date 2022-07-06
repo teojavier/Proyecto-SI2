@@ -20,3 +20,4 @@ Route::get('productos', [AuthController::class, 'productos']);
 Route::post('updatePerfil/{id}', [AuthController::class, 'UpdatePerfil']);
 Route::post('updatePassword/{id}', [AuthController::class, 'UpdatePassword']);
 Route::get('pedidos/{id}', [AuthController::class, 'pedidos']);
+Route::post('addProducto/{id}', [AuthController::class, 'addProducto']);
