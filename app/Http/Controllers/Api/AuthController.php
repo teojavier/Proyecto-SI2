@@ -52,11 +52,32 @@ class AuthController extends Controller{
 
         $cliente = User::find($id);
 
-        $cliente->name = $request->name;
-        $cliente->email = $request->email;
-        $cliente->direccion = $request->direccion;
-        $cliente->ci = $request->ci;
-        $cliente->telefono = $request->telefono;
+        if (is_null($request->name)) {
+            $cliente->name = $cliente->name;
+        }else{
+            $cliente->name = $request->name;
+        }
+        if (is_null($request->email)) {
+            $cliente->email = $cliente->email;
+        }else{
+            $cliente->email = $request->email;
+        }
+        if (is_null($request->direccion)) {
+            $cliente->direccion= $cliente->direccion;
+        }else{
+            $cliente->direccion = $request->direccion;
+        }
+        if (is_null($request->ci)) {
+            $cliente->ci = $cliente->ci;
+        }else{
+            $cliente->ci = $request->ci;
+        }
+        if (is_null($request->telefono)) {
+            $cliente->telefono = $cliente->telefono;
+        }else{
+            $cliente->telefono = $request->telefono;
+        }
+
         $cliente->save();
         return $cliente;
     }
