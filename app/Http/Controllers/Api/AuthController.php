@@ -149,11 +149,11 @@ class AuthController extends Controller{
         $detalle->precio = $request->cantidad * $producto->precio;
         //descuenta stock de productos
         $producto->stock = $producto->stock - $detalle->cantidad;
-        //$producto->save();
-        //$detalle->save();
+        $producto->save();
+        $detalle->save();
         //Pedido Total
         $pedido->total = $pedido->total + $detalle->precio;
-        //$pedido->save();
+        $pedido->save();
 
         $bita = new Bitacora();
         $bita->accion = 'Editó';
@@ -165,8 +165,8 @@ class AuthController extends Controller{
         $bita->id_user = $pedido->cliente_id;
         $ip = $request->ip();
         $bita->ip = $ip;
-        //$bita->save();*/
-        return $pedido;
+        $bita->save();
+        return $producto;
 
     }
 }
