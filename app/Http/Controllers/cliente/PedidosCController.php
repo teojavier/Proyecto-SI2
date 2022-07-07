@@ -171,7 +171,7 @@ class PedidosCController extends Controller
             'cantidad' => 'required|integer',
         ]);
         $pedido = Pedido::where('id',$request->idpedido)->first();
-        $producto = Producto::find($idproducto);
+        $producto = Producto::find($idproducto); 
         $detalle = new detalle_pedido();
         $detalle->producto_id = $idproducto;
         $detalle->pedido_id = $request->idpedido;
