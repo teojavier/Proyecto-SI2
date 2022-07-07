@@ -166,7 +166,7 @@ class AuthController extends Controller{
         $ip = $request->ip();
         $bita->ip = $ip;
         //$bita->save();*/
-        return $request->cantidad;
+        return $pedido;
 
     }
 }
