@@ -131,15 +131,14 @@ class AuthController extends Controller{
         return $pedidos;
     }
 
-    public function addProducto(Request $request, $idproducto){
+    public function addProducto(Request $request){
 
-        //body: idpedido   cantidad
-        //  addProducto/$idproducto
+        //body: cantidad  idproducto  idpedido
 
         $pedido = Pedido::where('id',$request->idpedido)->first();
-        $producto = Producto::find($idproducto);
+        $producto = Producto::find($request->idproducto);
         $detalle = new detalle_pedido();
-        $detalle->producto_id = $idproducto;
+        $detalle->producto_id = $request->idproducto;
         $detalle->pedido_id = $request->idpedido;
         $detalle->cantidad = $request->cantidad;
         //si la cantidad es mayor al stock
@@ -167,7 +166,7 @@ class AuthController extends Controller{
         $ip = $request->ip();
         $bita->ip = $ip;
         //$bita->save();*/
-        return $pedido;
+        return $request->cantidad;
 
     }
 }
