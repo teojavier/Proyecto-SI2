@@ -175,5 +175,9 @@ class AuthController extends Controller{
         return $detalles;
     }
 
+    public function nombreProducto($id){
+        $producto = DB::table('productos')->where('id', $id)->first();
+        return $producto->nombre;
+    }
 
 }
