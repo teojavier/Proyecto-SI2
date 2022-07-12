@@ -170,8 +170,8 @@ class AuthController extends Controller{
 
     }
 
-    public function pedido_detalle(Request $request){
-        $detalles = DB::table('detalle_pedidos')->where('pedido_id', $request->idpedido)->get();
+    public function pedido_detalle($id){
+        $detalles = DB::table('detalle_pedidos')->where('pedido_id', $id)->get();
         return $detalles;
     }
 
