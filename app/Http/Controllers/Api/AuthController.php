@@ -190,9 +190,30 @@ class AuthController extends Controller{
         return $detalles;
     }
 
-    public function nombreProducto($id){
-        $producto = DB::table('productos')->select('nombre')->where('id', $id)->first();
-        return $producto;
+    public function deleteDetalle(Request $request, $id){
+        $detalle = detalle_pedido::find($id);
+        $pedido = Pedido::where('id',$detalle->pedido_id)->first();
+        $producto = Producto::where('id', $detalle->producto_id)->first();
+        // el producto vuelve a subir
+        $producto->stock = $producto->stock + $detalle->cantidad;
+        //el total del pedido baja
+        $pedido->total = $pedido->total - $detalle->precio;
+        $producto->save();
+        $pedido->save();
+        $detalle->delete();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Eliminó';
+        $bita->apartado = 'Detalle_Pedido';
+        $afectado = $detalle->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = $pedido->cliente_id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        $bita->save();
+        return $detalle;
     }
 
 }
