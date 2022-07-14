@@ -69,6 +69,7 @@ class PedidoController extends Controller
         $pedido->fecha_pedido = now();
         $pedido->estado = 'En espera';
         $pedido->estado_pago = 'Impagado';
+        $pedido->total = 0;
         $pedido->save();
 
         $bita = new Bitacora();
