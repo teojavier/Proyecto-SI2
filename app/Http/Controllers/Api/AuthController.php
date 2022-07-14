@@ -171,12 +171,19 @@ class AuthController extends Controller{
     }
 
     public function pedido_detalle($id){
-        $detalles = DB::table('detalle_pedidos')->where('pedido_id', $id)->get();
+        //$detalles = DB::table('detalle_pedidos')->where('pedido_id', $id)->get();
+
+        $detalles = detalle_pedido::join('productos', 'detalle_pedidos.producto_id', 'productos.id')
+        ->select('detalle_pedidos.id', 'productos.nombre as nombreProducto','productos.precio as precioProducto', 'detalle_pedidos.cantidad', 'detalle_pedidos.precio')
+        ->where('detalle_pedidos.pedido_id', $id)
+        ->get();
+
+
         return $detalles;
     }
 
     public function nombreProducto($id){
-        $producto = DB::table('productos')->where('id', $id)->first();
+        $producto = DB::table('productos')->select('nombre')->where('id', $id)->first();
         return $producto;
     }
 
