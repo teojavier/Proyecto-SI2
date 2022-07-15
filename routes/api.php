@@ -24,3 +24,7 @@ Route::post('addProducto', [AuthController::class, 'addProducto']);
 Route::get('pedido_detalle/{id}', [AuthController::class, 'pedido_detalle']);
 Route::get('nombreProducto/{id}', [AuthController::class, 'nombreProducto']);
 Route::get('deleteDetalle/{id}', [AuthController::class, 'deleteDetalle']);
+
+Route::get('tipoPagos', [AuthController::class, 'tipoPagos']);
+Route::get('tipoEnvios', [AuthController::class, 'tipoEnvios']);
+Route::get('promociones', [AuthController::class, 'promociones']);

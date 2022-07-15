@@ -7,6 +7,9 @@ use App\Models\Bitacora;
 use App\Models\detalle_pedido;
 use App\Models\Pedido;
 use App\Models\Producto;
+use App\Models\Promocion;
+use App\Models\Tipo_envio;
+use App\Models\Tipo_pago;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -216,4 +219,19 @@ class AuthController extends Controller{
         return $detalle;
     }
 
+    public function tipoPagos(){
+        //$tipopagos = Tipo_pago::all()->select('id','nombre');
+        $tipopagos = DB::table('tipo_pagos')->select('id','nombre')->get();
+        return $tipopagos;
+    }
+
+    public function tipoEnvios(){
+        $tipoenvios = DB::table('tipo_envios')->select('id','nombre')->get();
+        return $tipoenvios;
+    }
+
+    public function promociones(){
+        $promociones = DB::table('promocions')->select('id','nombre')->get();
+        return $promociones;
+    }
 }
