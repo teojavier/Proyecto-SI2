@@ -221,17 +221,17 @@ class AuthController extends Controller{
 
     public function tipoPagos(){
         //$tipopagos = Tipo_pago::all()->select('id','nombre');
-        $tipopagos = DB::table('tipo_pagos')->select('nombre')->get();
+        $tipopagos = DB::table('tipo_pagos')->select('id','nombre')->get();
         return $tipopagos;
     }
 
     public function tipoEnvios(){
-        $tipoenvios = DB::table('tipo_envios')->select('nombre')->get();
+        $tipoenvios = DB::table('tipo_envios')->select('id','nombre')->get();
         return $tipoenvios;
     }
 
     public function promociones(){
-        $promociones = DB::table('promocions')->select('nombre')->get();
+        $promociones = DB::table('promocions')->select('id','nombre')->get();
         return $promociones;
     }
 }
