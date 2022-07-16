@@ -234,4 +234,41 @@ class AuthController extends Controller{
         $promociones = DB::table('promocions')->select('id','nombre')->get();
         return $promociones;
     }
+
+    public function storePedido(Request $request)
+    {
+        $request->validate([
+            'direccion' => 'required',
+            'tipoEnvio_id' => 'required',
+            'tipoPago_id' => 'required',
+            'cliente_id' => 'required',
+        ]);
+        $pedido = New Pedido();
+        $pedido->direccion = $request->direccion;
+        $pedido->tipoEnvio_id = $request->tipoEnvio_id;
+        $pedido->tipoPago_id = $request->tipoPago_id;
+        $pedido->promocion_id = $request->promocion_id;
+        $pedido->cliente_id = $request->cliente_id;
+        $pedido->fecha_pedido = now();
+        $pedido->estado = 'En espera';
+        $pedido->estado_pago = 'Impagado';
+        $pedido->total = 0;
+        //$pedido->save();
+
+        $bita = new Bitacora();
+        $bita->accion = 'Registró';
+        $bita->apartado = 'Pedido';
+        $afectado = $pedido->id;
+        $bita->afectado = $afectado;
+        $fecha_hora = date('m-d-Y h:i:s a', time()); 
+        $bita->fecha_h = $fecha_hora;
+        $bita->id_user = Auth::user()->id;
+        $ip = $request->ip();
+        $bita->ip = $ip;
+        //$bita->save();
+
+        return $pedido;
+
+    }
+
 }

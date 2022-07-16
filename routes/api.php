@@ -28,3 +28,4 @@ Route::get('deleteDetalle/{id}', [AuthController::class, 'deleteDetalle']);
 Route::get('tipoPagos', [AuthController::class, 'tipoPagos']);
 Route::get('tipoEnvios', [AuthController::class, 'tipoEnvios']);
 Route::get('promociones', [AuthController::class, 'promociones']);
+Route::post('storePedido', [AuthController::class, 'storePedido']);
