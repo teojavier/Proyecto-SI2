@@ -252,7 +252,7 @@ class AuthController extends Controller{
         $pedido->estado = 'En espera';
         $pedido->estado_pago = 'Impagado';
         $pedido->total = 0;
-        //$pedido->save();
+        $pedido->save();
 
         $bita = new Bitacora();
         $bita->accion = 'Registró';
@@ -264,7 +264,7 @@ class AuthController extends Controller{
         $bita->id_user = $request->cliente_id;
         $ip = $request->ip();
         $bita->ip = $ip;
-        //$bita->save();
+        $bita->save();
         return $pedido;
 
     }
