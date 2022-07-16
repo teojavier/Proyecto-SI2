@@ -237,17 +237,16 @@ class AuthController extends Controller{
 
     public function storePedido(Request $request)
     {
-        $request->validate([
-            'direccion' => 'required',
-            'tipoEnvio_id' => 'required',
-            'tipoPago_id' => 'required',
-            'cliente_id' => 'required',
-        ]);
+        $user = User::find($request->cliente_id);
+        $envio = DB::table('tipo_envios')->where('nombre', $request->tipoEnvio)->first();
+        $pago = DB::table('tipo_pagos')->where('nombre', $request->tipoPago)->first();
+        $promo = DB::table('promocions')->where('nombre', $request->promocion)->first();
+
         $pedido = New Pedido();
-        $pedido->direccion = $request->direccion;
-        $pedido->tipoEnvio_id = $request->tipoEnvio_id;
-        $pedido->tipoPago_id = $request->tipoPago_id;
-        $pedido->promocion_id = $request->promocion_id;
+        $pedido->direccion = $user->direccion;
+        $pedido->tipoEnvio_id = $envio->id;
+        $pedido->tipoPago_id = $pago->id;
+        $pedido->promocion_id = $promo->id;
         $pedido->cliente_id = $request->cliente_id;
         $pedido->fecha_pedido = now();
         $pedido->estado = 'En espera';
@@ -262,11 +261,10 @@ class AuthController extends Controller{
         $bita->afectado = $afectado;
         $fecha_hora = date('m-d-Y h:i:s a', time()); 
         $bita->fecha_h = $fecha_hora;
-        $bita->id_user = Auth::user()->id;
+        $bita->id_user = $request->cliente_id;
         $ip = $request->ip();
         $bita->ip = $ip;
         //$bita->save();
-
         return $pedido;
 
     }
