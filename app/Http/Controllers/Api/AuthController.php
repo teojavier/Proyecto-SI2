@@ -237,6 +237,17 @@ class AuthController extends Controller{
 
     public function storePedido(Request $request)
     {
+        if($request->tipoEnvio == ''){
+            return response()->json(['message' => 'faltan datos'], 404);
+        }
+        if($request->tipoPago == ''){
+            return response()->json(['message' => 'faltan datos'], 404);
+        }
+        if($request->cliente_id == ''){
+            return response()->json(['message' => 'faltan datos'], 404);
+        }
+
+
         $user = User::find($request->cliente_id);
         $envio = DB::table('tipo_envios')->where('nombre', $request->tipoEnvio)->first();
         $pago = DB::table('tipo_pagos')->where('nombre', $request->tipoPago)->first();
