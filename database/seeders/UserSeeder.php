@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
             'ci' => '202020',
             'sueldo' => 2400,
             'cargo' => 'Encargado de Ventas'
-        ])->assignRole('Admin');
+        ])->assignRole('Empleado');
 
         User::create([
             'name' => 'Oscar Oros',
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
             'telefono' => '785222930',
             'ci' => '2028590',
             'tipo' => 'Cliente'
-        ])->assignRole('Admin');
+        ])->assignRole('Cliente');
 
         User::create([
             'name' => 'Erick Lopez',
@@ -69,7 +69,7 @@ class UserSeeder extends Seeder
             'telefono' => '700008930',
             'ci' => '748520',
             'tipo' => 'Cliente'
-        ])->assignRole('Admin');
+        ])->assignRole('Cliente');
 
         
         Categoria::create([

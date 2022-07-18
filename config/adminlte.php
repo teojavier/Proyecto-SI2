@@ -246,12 +246,13 @@ return [
         [
             'text'    => 'Gestionar Informacion',
             'icon'    => 'fas fa-fw fa-sitemap',
+            'can'    => 'admin',
             'submenu' => [
                 [
                     'text' => 'Configuraciones',
                     'route'  => 'admin.configuracion.index',
                     'icon' => 'fas fa-fw fa-cog',
-                    'can' => 'admin.users.index'
+                    'can' => 'admin'
                 ],
         
                 [
@@ -279,21 +280,21 @@ return [
                     'text' => 'Usuarios',
                     'route'  => 'admin.users.index',
                     'icon' => 'fas fa-fw fa-users',
-                    'can' => 'admin.users.index'
+                    'can' => 'empleado.admin'
                 ],
 
                 [
                     'text' => 'Clientes',
                     'route'  => 'admin.clientes.index',
                     'icon' => 'fas fa-fw fa-user-tie',
-                    'can' => 'admin.users.index'
+                    'can' => 'empleado.admin'
                 ],
 
                 [
                     'text' => 'Empleados',
                     'route'  => 'admin.empleados.index',
                     'icon' => 'fas fa-fw fa-user-tag',
-                    'can' => 'admin.users.index'
+                    'can' => 'admin'
                 ],
 
             ],
@@ -305,26 +306,27 @@ return [
         [
             'text'    => 'Gestionar Productos',
             'icon'    => 'fas fa-fw fa-book',
+            'can'     => 'admin', 
             'submenu' => [
                 [
                     'text' => ' Productos',
                     'route'  => 'admin.productos.index',
                     'icon' => 'fas fa-fw fa-store',
-                    'can' => 'admin.productos.index'
+                    'can' => 'admin'
                 ],
         
                 [
                     'text' => ' Categorias',
                     'route'  => 'admin.categorias.index',
                     'icon' => 'fas fa-fw fa-gifts',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'admin'
                 ],
         
                 [
                     'text' => ' Marcas',
                     'route'  => 'admin.marcas.index',
                     'icon' => 'fas fa-fw fa-bookmark',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'admin'
                 ],
             ],
         ],
@@ -332,19 +334,20 @@ return [
         [
             'text'    => 'Detalle de Compra',
             'icon'    => 'fas fa-fw fa-truck',
+            'can'     => 'admin',
             'submenu' => [
                 [
                     'text' => ' Proveedores',
                     'route'  => 'admin.proveedores.index',
                     'icon' => 'fas fa-fw fa-user-tag',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'admin'
                 ],
 
                 [
                     'text'    => 'Detalle',
                     'icon' => 'fas fa-fw fa-info',
                     'route'  => 'admin.detalle_productos.index',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'admin'
                 ],
             ],
         ],
@@ -357,14 +360,14 @@ return [
                     'text' => 'Pedidos',
                     'route'  => 'admin.pedidos.index',
                     'icon' => 'fas fa-fw fa-shopping-cart',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'empleado.admin'
                 ],
 
                 [
                     'text'    => 'Detalle de Pedido',
                     'icon' => 'fas fa-fw fa-info-circle',
                     'route'  => 'admin.detalle_pedidos.index',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'empleado.admin'
                 ],
 
 
@@ -372,41 +375,32 @@ return [
                     'text'    => 'Tipo de Envio',
                     'icon' => 'fas fa-fw fa-car',
                     'route'  => 'admin.tipo_envios.index',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'admin'
                 ],
 
                 [
                     'text'    => 'Tipo de Pago',
                     'icon' => 'fas fa-fw fa-credit-card',
                     'route'  => 'admin.tipo_pagos.index',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'admin'
                 ],
 
                 [
                     'text'    => 'Factura',
                     'icon' => 'fas fa-fw fa-fax',
                     'route'  => 'admin.facturas.index',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'empleado.admin'
                 ],
 
                 [
                     'text'    => 'Promociones',
                     'icon' => 'fas fa-fw fa-percent',
                     'route'  => 'admin.promociones.index',
-                    'can' => 'admin.categorias.index'
+                    'can' => 'admin'
                 ],
             ],
             ],
-    
 
-
-
-        [
-            'text' => ' Imagen',
-            'route'  => 'admin.perfil.index',
-            'icon' => 'fas fa-fw fa-user-tag',
-            'can' => 'admin.categorias.index'
-        ],
 
     
     ],

@@ -60,7 +60,7 @@ class EmpleadoController extends Controller
             'cargo' => $request->cargo,
             'sueldo' => $request->sueldo, 
             'tipo' => 'Empleado'
-        ]);
+        ])->assignRole('Empleado');;
 
         $bita = new Bitacora();
         $bita->accion = 'Registró';
