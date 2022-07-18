@@ -273,8 +273,8 @@ class UserSeeder extends Seeder
         ]);
 
         Tipo_pago::create([
-            'nombre' => 'Transaccion QR',
-            'descripcion' => 'Deposito bancario mediante QR'
+            'nombre' => 'Transaccion',
+            'descripcion' => 'Deposito bancario'
         ]);
 
         Tipo_pago::create([
