@@ -162,8 +162,8 @@ class PedidosCController extends Controller
         $pedido = Pedido::where('id', $id)->first();
         $categorias = Categoria::all();
         $marcas = Marca::all();
-        $productos = Producto::paginate(3);
-        return view('cliente.Pedidos.productos', compact('productos','categorias','marcas','pedido'));
+        //$productos = Producto::paginate(3);
+        return view('cliente.productos', compact('categorias','marcas','pedido'));
     }
 
     public function storeP(Request $request, $idproducto){

@@ -139,6 +139,7 @@ class AuthController extends Controller{
 
     public function pedidos($id){
         $pedidos = DB::table('pedidos')->where('cliente_id', $id)->get();
+
         return $pedidos;
     }
 

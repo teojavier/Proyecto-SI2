@@ -83,7 +83,7 @@
                         @endforeach
                 </div>
 
-                {{ $productos->links() }}
+                {{ $productos->onEachSide(1)->links() }}
             @else
                 <div class="card-body">
                     <strong> No hay Productos</strong>
