@@ -10,6 +10,7 @@ use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Marca;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -178,5 +179,18 @@ class ProductoController extends Controller
         $bita->save();
 
         return back()->with('info','El Producto ha sido eliminado correctamente');
+    }
+
+
+    
+    public function reporte(){
+
+        $datos = Producto::join('categorias', 'productos.categoria_id', 'categorias.id')
+        ->join('marcas', 'productos.marca_id', 'marcas.id')
+        ->select('productos.id', 'productos.nombre','productos.descripcion', 'productos.precio', 'productos.stock', 'productos.imagen','categorias.nombre as categoria', 'marcas.nombre as marca')
+        ->get();
+
+
+        return $datos;
     }
 }
