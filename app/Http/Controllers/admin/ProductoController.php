@@ -184,13 +184,9 @@ class ProductoController extends Controller
 
     
     public function reporte(){
-
-        $datos = Producto::join('categorias', 'productos.categoria_id', 'categorias.id')
-        ->join('marcas', 'productos.marca_id', 'marcas.id')
-        ->select('productos.id', 'productos.nombre','productos.descripcion', 'productos.precio', 'productos.stock', 'productos.imagen','categorias.nombre as categoria', 'marcas.nombre as marca')
-        ->get();
-
-
-        return $datos;
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+        $productos = Producto::all();
+        return view('admin.productos.reporte', compact('productos', 'categorias', 'marcas'));
     }
 }

@@ -58,6 +58,7 @@ Route::get('detalle_pedidos/editGeneral/{id}',[detalle_pedidoController::class,'
 
 //Buscar bitacora dinamica
 Route::get('BitacoraDinamica',[BitacoraController::class,'textBitacora'])->name('admin.bitacora.textBitacora');
+Route::get('reporteExamen',[ProductoController::class,'reporte'])->name('admin.examen');
 
 
 //Generar PDF

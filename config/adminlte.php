@@ -398,6 +398,13 @@ return [
                     'route'  => 'admin.promociones.index',
                     'can' => 'admin'
                 ],
+
+                [
+                    'text'    => 'Promociones',
+                    'icon' => 'fas fa-fw fa-percent',
+                    'route'  => 'admin.promociones.index',
+                    'can' => 'admin'
+                ],
             ],
             ],
 
