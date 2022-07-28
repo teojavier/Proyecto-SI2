@@ -24,12 +24,12 @@ class UserSeeder extends Seeder
     public function run(){
 
         Configuration::create([
-                'razon_social' => 'TiendaSI2',
+                'razon_social' => 'TechnoSoft',
                 'factura' => '123456789',
-                'email' => 'tiendaSI2@gmail.com',
-                'telefono' => '+951 700000000',
-                'direccion' => 'Urbanizacion Secret',
-                'responsable' => 'Product Owner'
+                'email' => 'TechnoSoft@gmail.com',
+                'telefono' => '+951 78149429',
+                'direccion' => 'Urb Las Palmas',
+                'responsable' => 'Administrador'
         ]);
         
         User::create([
