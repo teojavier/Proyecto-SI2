@@ -400,9 +400,9 @@ return [
                 ],
 
                 [
-                    'text'    => 'Promociones',
+                    'text'    => 'Examen',
                     'icon' => 'fas fa-fw fa-percent',
-                    'route'  => 'admin.promociones.index',
+                    'route'  => 'admin.examen',
                     'can' => 'admin'
                 ],
             ],

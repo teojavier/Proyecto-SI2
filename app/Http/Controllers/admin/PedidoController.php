@@ -137,6 +137,7 @@ class PedidoController extends Controller
         $pedido->direccion = $request->direccion;
         $pedido->tipoEnvio_id = $request->tipoEnvio_id;
         $pedido->tipoPago_id = $request->tipoPago_id;
+        $pedido->promocion_id = $request->promocion_id;
         $pedido->save();
 
         $bita = new Bitacora();

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Producto;
 use App\Models\Categoria;
+use App\Models\detalle_productos;
 use App\Models\Marca;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -187,6 +188,7 @@ class ProductoController extends Controller
         $marcas = Marca::all();
         $categorias = Categoria::all();
         $productos = Producto::all();
-        return view('admin.productos.reporte', compact('productos', 'categorias', 'marcas'));
+        $detalle = detalle_productos::all();
+        return view('admin.productos.reporte', compact('productos', 'categorias', 'marcas', 'detalle'));
     }
 }
