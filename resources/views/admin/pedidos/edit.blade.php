@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="">Pomocion: </label>
+                    <label for="">Promocion: </label>
                     <select name=promocion_id id=promocion_id class="form-control">
                         @foreach ($promociones as $dato2)
                             @if ($dato2->id == $pedido->promocion_id)

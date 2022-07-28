@@ -399,12 +399,6 @@ return [
                     'can' => 'admin'
                 ],
 
-                [
-                    'text'    => 'Examen',
-                    'icon' => 'fas fa-fw fa-percent',
-                    'route'  => 'admin.examen',
-                    'can' => 'admin'
-                ],
             ],
             ],
 

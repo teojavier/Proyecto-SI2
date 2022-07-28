@@ -85,7 +85,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="">Pomocion: </label>
+                                <label for="">Promocion: </label>
                                 <select name=promocion_id id=promocion_id class="form-control">
                                     <option value="">-- Ninguna --</option>
 
