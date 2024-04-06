@@ -67,7 +67,6 @@ class HomeController extends Controller
             } else {
                 if (auth()->user()->tipo == 'Empleado') {
                     $configuration = Configuration::find(1);
-
                     $bita = new Bitacora();
                     $bita->accion = 'Inició Sesión';
                     $bita->apartado = 'Usuario';
@@ -79,7 +78,6 @@ class HomeController extends Controller
                     $ip = $request->ip();
                     $bita->ip = $ip;
                     $bita->save();
-                    
                     return view('admin.index', compact('configuration'));
                 }
             }
